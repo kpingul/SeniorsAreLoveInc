@@ -1,0 +1,35 @@
+<div class="container db-container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="text-transform: none">{{caregivers.length}} caregivers found near San Francisco, CA</h2>
+				
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat='caregiver in caregivers track by $index'>
+							<div class="media" style="    background: #F1F1F1;padding: 30px">
+								  <div class="media-left">
+								    <a ui-sref="caregiverProfile({id: caregiver._id})">
+								    	<img src="/public/build/img/userlogo.jpg" width="100" class="media-object"  alt="">
+								    </a>
+								  </div>
+								  <div class="media-body">
+								  	<a ui-sref="caregiverProfile({id: caregiver._id})" style="color: #555">
+									    <h4 class="media-heading" style="color: #FF6060">{{caregiver.fName}} {{caregiver.lName[0]}}. <small class="right">{{caregiver.contact.city}}</small></h4>
+											<p>{{caregiver.about.slice(0, caregiver.about.length/3)}}...</p>
+											<p><span class="label label-danger">{{caregiver.yrsExp}}+ Exp</span></p>
+											<span class="label label-danger" style="margin-right: 5px" ng-repeat="skill in caregiver.skills">
+												{{skill}}
+											</span>
+								  	</a>
+								  </div>
+								  <div class="media-right">
+								  	 <h4>${{caregiver.hourRate}}/<small>Hour</small></h4>
+								  </div>
+							</div>
+					</li>
+				</ul>
+
+
+		</div>
+	</div>
+
+</div>

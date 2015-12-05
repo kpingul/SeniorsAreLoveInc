@@ -1,0 +1,120 @@
+<div class="row cg-profile-row">
+	<h4 >Add a new job</h4>
+	
+	<div class="col-sm-6 col-md-6">
+		<h5>Care Needs</h5>
+		
+			<form>
+					<div class="form-group">
+					  <label for="care">Who Needs Care?</label>
+						<select name="" id="" class="form-control" ng-model="user.patient">
+							<option value=""></option>
+							<option value="Grandmother">My Grandmother</option>
+							<option value="Grandfather">My Grandfather</option>
+							<option value="Mother">My Mother</option>
+							<option value="Father">My Father</option>
+							<option value="Auntie">My Auntie</option>
+							<option value="Uncle">My Uncle</option>
+							<option value="Sister">My Sister</option>
+							<option value="Brother">My Brother</option>
+						</select>
+				    </div>
+
+				    <div class="form-group">
+				    	<label for="location">Location of Care Needed</label>
+				    	<input type="text" class="form-control" placeholder="eg: Daly City" ng-model="user.locationOfPatient">
+				    </div>
+				    <div class="form-group">
+				    	<label for="location">Primary Number Of Care</label>
+				    	<input type="text" class="form-control" placeholder="eg: (415)312-1111" ng-model="user.contactOfPatient">
+				    </div>
+
+			    <div class="form-group">
+			      <label>What daily activities do they need help with?</label>
+			      <div class="input-group">
+			    		<input type="text" class="form-control" placeholder="eg: Managing Medications" ng-model="user.newActivity">
+			    		<div class="input-group-btn">
+			        	<button style="padding: 6px"class="btn btn-danger btn-md" ng-click="addActivity(user.newActivity)" >Add Activity</button>
+			      	</div>
+						</div>
+						
+						<div style="padding: 10px 0px">
+							<span style="font-size: 1em; margin: 4px; padding: 12px; display: inline-block" class="label label-default" ng-repeat="activity in user.dailyActivities track by $index">
+								{{activity}}		<span style="cursor: pointer" ng-click="removeActivity($index)" >X</span>	
+							</span>
+						</div>
+			    </div>
+
+			    <h5>Tell us about the care schedule</h5>
+
+			    <div class="form-group">
+					  <label for="schedule">When would you like the care to begin?</label>
+					    <div class="input-group">
+				      	<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+				      	<input type="text" class="form-control" placeholder="12/22/14" ng-model="user.startDate">
+				    </div>
+					</div>
+
+					<div class="form-group">
+						<label for="daysOfCare">How many days of care are needed each week?</label>
+						<div class="input-group">
+							<input type="text" class="form-control" ng-model="user.daysOfCare">
+							<div class="input-group-addon">days</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="timeOfCare">What time(s) of day is care needed?</label>
+						<select name="" id="" class="form-control" ng-model="user.timesOfDayCare">
+							<option value="Morning">Morning</option>
+							<option value="Afternoon">Afternoon</option>
+							<option value="Evening">Evening</option>
+							<option value="Morning/Afternoon">Morning/Afternoon</option>
+							<option value="Morning/Evening">Morning/Evening</option>
+							<option value="Afternoon/Evening">Afternoon/Evening</option>
+							<option value="OverNight">OverNight</option>
+						</select>
+					
+					
+					</div>
+
+					<div class="form-group">
+						<label for="hoursPerWeek">How many hours per week of care are required?</label>
+						<div class="input-group">
+							<input type="text" class="form-control" ng-model="user.hoursPerWeekCare">
+							<div class="input-group-addon">hour/week</div>
+						</div>
+					</div>
+
+					 <h5>Caregiver preferences</h5>
+
+					 <div class="form-group">
+						<label for="gender">My caregiver is..</label>
+						<select name="" id="" class="form-control" ng-model="user.preferGender">
+							<option value=""></option>
+							<option value="female">Female</option>
+							<option value="male">Male</option>
+							<option value="any">Any</option>
+						</select>
+					</div>
+
+
+					 <div class="form-group">
+						<label for="gender">Should be living..</label>
+						<select name="" id="" class="form-control" ng-model="user.preferCareType">
+							<option value="live-out">In their own home (Live-out)</option>
+							<option value="live-in">In our family's home (Live-in)</option>
+						</select>
+					</div>
+
+
+			  
+			    <button type="submit" class="btn btn-danger" ng-click="saveJob()">Save <i ng-if="jobSubmitted" class="fa fa-spinner fa-spin"></i></button>
+	</form> 
+
+		
+	</div>
+
+
+		
+</div>

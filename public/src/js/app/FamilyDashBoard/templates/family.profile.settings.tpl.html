@@ -1,0 +1,30 @@
+<div class="row cg-profile-row">
+  <div class="col-md-6">
+  	<h4 >Account Information</h4>
+
+  	<form ng-submit="updateAccount()">
+          <div class="form-group">
+            <label for="inputEmail3">First Name</label>
+              <input type="text" class="form-control" name="fName" id="inputEmail3" placeholder="First Name" ng-model="user.fName">
+          </div>
+           <div class="form-group">
+            <label for="inputEmail3">Last Name</label>
+              <input type="text" class="form-control" name="lName" id="inputEmail3" placeholder="Last Name" ng-model="user.lName">
+          </div>   
+          <div class="form-group">
+            <label for="inputEmail3">Email</label>
+              <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email" ng-model="user.email">
+          </div>  
+          <div class="form-group">
+            <label for="inputEmail3">Primary Phone</label>
+              <input type="text" class="form-control" name="phone" id="inputEmail3" placeholder="(415)xxx-xxxx" ng-model="user.phone">
+          </div>  
+        
+          <button type="submit" class="btn btn-danger btn-block">Update Account <i ng-if="accountSubmitted" class="fa fa-spinner fa-spin"></i></button>
+  	</form> 
+    
+  </div>
+
+
+		
+</div>

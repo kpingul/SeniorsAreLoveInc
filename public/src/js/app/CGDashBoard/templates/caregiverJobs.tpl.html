@@ -1,0 +1,19 @@
+<div class="container db-container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="text-transform: none">{{caregiverJobs.length}} jobs found near San Francisco, CA</h2>
+				
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat='job in caregiverJobs track by $index'>
+						<a ui-sref="caregiverJob({id: job._id})" style="color:#555">
+							<p style="color: #ADADAD"><strong>Job #{{job._id}}</strong> - 10/11/2015</p>
+							<h6>{{job.locationOfPatient}}, CA</h6>
+							<h6>{{job.hoursPerWeekCare}}hrs/Week</h6>
+							<a ui-sref="caregiverJob({id: job._id})">View</a>
+						</a>
+					</li>
+				</ul>
+		</div>
+	</div>
+
+</div>

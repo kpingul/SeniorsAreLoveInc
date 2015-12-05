@@ -1,0 +1,556 @@
+<div class="container-fluid main-page" >
+   <div class="row">
+
+        <div id="home" class="carousel slide" data-ride="carousel" activate-carousel>
+      <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="home" data-slide-to="0" class="active"></li>
+            <li data-target="#home" data-slide-to="1"></li>  
+             <li data-target="#home" data-slide-to="2"></li>
+          </ol>
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <a href="">
+                  <img class="img-responsive carousel-images" src="build/img/compassionate-nurse-1.jpg" alt="">
+                 </a>
+              
+
+            </div>
+
+            <div class="item">
+              <a href="">
+                <img class="img-responsive  carousel-images" src="build/img/Cleaning-Services.jpg" alt="">
+              </a>
+
+               
+            </div>
+            <div class="item">
+              <a href="">
+                <img class="img-responsive  carousel-images" src="build/img/cleaningservices.jpg" alt="">
+              </a>
+
+            
+            </div>
+
+          </div>
+
+          <!-- Left and right controls -->
+          <a class="left carousel-control" href="#home" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#home" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        
+    </div>
+
+    <div class="row main-section">
+            <p class="form-landing-page-subheader">Who We Are</p>
+
+            <span class="main-section-description">Seniors Are Love Inc. is a non-medical care giving agency that provides professional services to clients who are still able to remain in their own homes. We specialize in the care of seniors who need personalized attention, companionship and independence or recovering from an injury or illness.</span>
+    </div>
+    
+
+
+    <div class="row service-section">
+               <p class="form-landing-page-subheader">What We Offer</p>
+
+
+        <div class=" col-xs-12 col-sm-4 col-md-4 col-lg-4 service-section-cols"  >
+            
+            <h4 class="service-section-header"><strong>In Home Services</strong></h4>
+            <i class="fa fa-home fa-5x "></i>
+
+            <p class="service-section-title"><strong>Affordable and awesome care.</strong></p>
+        </div>
+
+         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4  service-section-cols"  >
+                  <h4  class="service-section-header"><strong>Job opportunities</strong></h4>
+                    
+                  <i class="fa fa-search fa-5x "></i>
+
+                    <p class="service-section-title"><strong>On-demand opportunities for caregivers.</strong></p>
+        </div>
+
+   
+
+         <div class="col-xs-12 col-sm-4  col-md-4 col-lg-4  service-section-cols"  > 
+             <h4  class="service-section-header"><strong>24-Hour support</strong></h4>
+            
+            <i class="fa fa-clock-o fa-5x "></i>
+
+            <p class="service-section-title"><strong>24/7 customer support services.</strong></p>
+        </div>
+
+        
+
+      
+    </div>
+
+    <div class="row contact-section">
+        <div class="col-md-6 col-centered" style="text-align:center; padding: 25px">
+
+                   <h1 class="form-landing-page-subheader" style="padding-bottom: 30px">Contact Us Today For Free Consultation!</h1>
+     
+       <form name="userForm" ng-submit="requestConsultation(userForm.$valid)" novalidate>
+
+          <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+
+            <input type="text" name="name" class="form-control" ng-model="name" placeholder="NAME" required>
+
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">You name is required.</p>
+
+          </div>
+
+            <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+
+              <input type="email" name="email" class="form-control"  ng-model="email" placeholder="EMAIL" required>
+              <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="left"class="help-block"style="color: #a94442" >Enter a valid email.</p>
+
+            </div>
+            
+            <div class="form-group" ng-class="{ 'has-error' : userForm.phone.$invalid && !userForm.phone.$pristine }">
+              
+              <input type="text" name="phone" class="form-control"  ng-model="phone"  placeholder="PHONE" required>
+               <p ng-show="userForm.phone.$invalid && !userForm.phone.$pristine" class="left" class="help-block" style="color: #a94442">Enter valid phone.</p>
+            </div>
+
+            <div class="form-group">
+              
+              <textarea class="form-control" rows="3"  ng-model="request"  placeholder="REQUEST" required></textarea>
+            </div>
+
+            <div class="form-group" ng-show="finalSubmit">
+              <p>Thank you for submitting! We'll give you a contact as soon as possible.</p>
+            </div>
+
+            <div class="form-group">
+              
+               <button type="submit" style="background-color: #fff" class="buttonSubmit" ng-disabled="userForm.$invalid">Submit  <span ng-hide="!submitForm" class="glyphicon glyphicon-refresh glyphicon-spin"></span></button>
+
+            </div>
+
+    
+    </form>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body{
+  font-family: 'Raleway', sans-serif;
+
+  }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+  .navbar{
+    margin-bottom: 0;
+  }
+.navbar-default{
+  text-align: center;
+  background: #cc5350;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
+  font-size: 1.2em;
+}
+.navbar-default .navbar-brand{
+  color: #fff;
+}
+.navbar-left{
+  margin-left: 15%;
+  list-style: none;
+}
+.navbar-right{
+  list-style: none;
+  
+}
+
+.title{
+font-family: 'Pacifico';
+  display: inline;
+  color: #fff;
+  font-weight: bold;
+  font-size: 2.4em;
+}
+.title-subheader{
+font-family: 'Pacifico', cursive;
+    color: #fff;
+    display: block;
+    text-align: left;
+    font-size: 2em;
+  font-weight: bold;
+}
+
+
+.title a{
+  color: #A00;
+}
+
+.form-landing-page-subheader{
+  color: #cc5350;
+  text-align: center;
+  font-size: 2.9em;
+  font-family: 'Kaushan Script', cursive;
+      padding: 16px 0px;
+}
+
+.panel-transparent {
+    background: none;
+}
+.panel-transparent .panel-heading{
+    background: rgba(255, 255, 255, 0.8)!important
+}
+
+.panel-transparent .panel-body{
+    background: rgba(255, 255, 255, 0.8)!important
+}
+
+
+.form-landing-page-submit{
+  width: 49.85%;
+  font-size: 1.4em;
+  padding: 10px 0 ;
+
+  
+}
+.form-landing-page-submit-2{
+
+  text-align: center;
+  
+
+  
+}
+.main-section{
+  padding: 40px 0px;
+}
+.main-section-description {
+  width: 70%;
+    margin: 0 auto;
+        font-size: 1.7em;
+    display: block;
+    line-height: 1.6em;
+        word-break: break-word;
+}
+.service-section{
+    background-color: #FFF2F2; 
+  padding: 40px 0px;
+}
+.service-section-title{
+  color: #808080;
+  margin: 0 auto;
+  width: 50%;
+}
+
+.service-section-header{
+  font-size: 1.4em;
+
+}
+.service-section-cols{
+  text-align:center;
+  margin-bottom: 2%;
+}
+.contact-section{
+
+  padding: 40px 0px;
+}
+
+  
+.form-landing-p
+.glyphicon{
+      top: 4px;
+}
+
+.form-landing-page-description{
+  padding: 0;
+  list-style: none;
+}
+.form-landing-page-description li{
+  padding: 6px 0;
+}
+
+.activeTask{
+  border: 1px solid #E27729;
+}
+
+
+.offer-icons{
+  width: 12%;
+}
+
+
+.carousel-images{
+
+width: 100%;
+}
+.fa{
+  width: 165px;
+  color: #cc5350;
+  padding: 30px;
+
+  border-radius: 50%;
+  border: 1px solid #cc5350;
+  
+}
+
+.carousel-inner{
+  width:100%;
+  max-height: 100%;
+}
+  .carousel{
+        height:auto;
+  }
+  .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  
+    height: auto;
+}
+footer{
+  position: static;
+  color: #fff;
+  background: #3A3A3A;
+    font-weight: bold;
+    text-align: center;
+    padding: 50px 0;
+    background: 
+}
+.company-tel{
+  color: #678071;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1.3em;
+}.company-tel:hover{
+  color: #678071;
+
+}
+.carousel-caption{
+  
+
+
+}
+.carousel-images-0, .carousel-images-1{
+  font-family: 'Raleway';
+  font-size: 3em;
+  color: #E24040;
+  font-weight: bold;
+}
+
+
+.glyphicon-spin {
+    -webkit-animation: spin 1000ms infinite linear;
+    animation: spin 1000ms infinite linear;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+.has-error{
+  border-color: red;
+}
+/* BUTTON CSS
+------------------------------------------- */
+
+.buttonSubmit{
+  display:inline-block;
+  
+  font:normal normal 300 1.3em 'Open Sans';
+  text-decoration:none; 
+  
+  color: #D45C5C;
+  brackground-color:white;
+  border:1px solid #D45C5C;
+
+  
+  padding: .3em 1.2em;
+  margin:5px;
+      
+  background-size: 200% 100%; 
+  background-image: linear-gradient(to right, transparent 50%, #D45C5C 50%);
+  transition: background-position .3s cubic-bezier(0.19, 1, 0.22, 1) .1s, color .5s ease 0s, background-color .5s ease;
+}
+
+.buttonSubmit:hover{
+  color:rgba(255, 255, 255, 1);
+  background-color: #D45C5C;
+  background-position: -100% 100%;
+}
+
+
+.footer-contact{
+  color: #cc5350;
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.footer-contact:hover{
+  color: #cc5350;
+}
+
+
+
+
+
+@media (max-width: 990px) {
+.offer-icons{
+  width: 10%;
+}
+
+@media (max-width: 768px) {
+  .navbar-left, .navbar-right{
+    padding:0;
+    margin-left: 0;margin-right: 0;
+
+    font-size: 1.4em;
+  }
+  .title-subheader{
+    display: block;
+  }
+
+  .offer-icons{
+    width: 15%;
+  }
+  .form-landing-page-submit{
+
+    font-size: 1em;
+  
+  }
+
+  .title{
+      font-size: 2.2em;
+    
+
+  }
+  .main-section{
+    padding: 30px 0px;
+    padding-bottom: 40px;
+  }
+.main-section-description{
+  font-size: 1.2em;
+  word-break: initial;
+  text-align: center;
+  width: 80%;
+}
+  .form-landing-page-subheader{
+    font-size: 2.4em;
+  }
+  .carousel{
+        height: 250px;
+  }
+  .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  
+    height: 250px;
+  }
+  .navbar-default .navbar-nav > li > a {
+
+  font-size: 0.8em;
+
+}
+.service-section-title {
+    margin-bottom: 6%;
+
+
+}
+
+@media (max-width: 500px) {
+  .fa{
+      width: 136px;
+    padding: 20px;
+      font-size: 3.4em;
+
+  }
+  .carousel-caption{
+    width: 26%;
+  
+  }
+  .carousel-images-0{
+  
+    position: relative;
+    right: 50px;
+
+      font-size: 1.1em;
+  }
+  .carousel-images-1{
+    position: relative;
+    left: 70px;
+    right: 25px;
+        font-size: 0.9em;
+        top: 10px;
+          width: 130%;
+      
+  }
+  .carousel-indicators {
+    display: none;
+  }
+  .service-section {
+      padding: 23px 0;
+  }
+}
+
+
+@media (max-width: 360px) {
+  .carousel-images-0 {
+  
+    position: relative;
+    right: 43px;
+    top: 20px;
+
+  }
+  .carousel-images-1{
+
+  position: relative;
+    left: 70px;
+        right: 20px;
+  
+          width: 122%;
+      
+  }
+}
+
+
+
+
+

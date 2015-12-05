@@ -1,0 +1,89 @@
+<div class="container db-container">
+	<div class="row">
+		
+		<div class="col-xs-12 col-sm-9 col-md-9 cg-family-cgprofile">
+
+			<a href="">
+				
+				<img src="/public/build/img/userlogo.jpg" width="140" class="img-responsive" alt="">
+
+				
+			</a>
+
+		</div>	
+
+		<div class="col-xs-12 col-sm-3 col-md-3 cg-profile-sub">
+
+			<p>{{caregiver.fName}} {{caregiver.lName}}</p >
+			
+			<hr/>
+			<h5>{{caregiver.yrsExp}}+ Years Exp</h5>
+			<h5>Hourly Rate</h6>
+			<small class="mainColor" style="font-size: 1.3em;"><strong>${{caregiver.hourRate}}</strong></small>
+						
+			<h5>Phone</h5>
+			<small>{{::caregiver.phone}}</small>
+			<h5>Gender</h6>
+			<small >{{::caregiver.gender}}</small>
+
+			
+			<h5>Address</h5>
+			<small>{{::caregiver.contact.city | uppercase}}, CA, {{::caregiver.contact.zipCode}}</small>				
+	
+
+			<p>
+				
+			<button class="btn btn-danger btn-md" ui-sref="messageCareGiver({id: caregiver._id})">Message</button>
+			</p>
+
+
+		</div>
+		
+	</div>
+		
+		<hr/>
+
+		<div class="row cg-basic-info-row">
+			<div class="col-sm-12">
+
+
+					<h4>About 
+					
+					</h4>
+						<p>{{caregiver.about}}</p>
+						
+
+					<hr/>
+
+						<h4>Services 
+						
+					</h4>
+				
+						<h6>Type of Care</h6>
+						<p>{{caregiver.careType}}</p>
+						<h6>Skills And Expertise</h6>
+							<span style="font-size: 1em; margin: 4px; padding: 8px; display: inline-block" class="label label-default" ng-repeat="service in caregiver.skills track by $index">
+								{{service}}	
+							</span>
+
+					<hr />
+
+					<h4>Experience 
+				
+						</a>
+					</h4>
+	
+					<div ng-if="caregiver.workExp.length > 0">
+								<h6>Work Experience</h6>
+								<address ng-repeat="exp in caregiver.workExp track by $index">
+									{{exp.title}}<br>
+									{{exp.employer}}<br>
+									{{exp.start}} - {{exp.end}}<br>
+									{{exp.desc}}
+								</address>
+					</div>
+					<hr/>
+			</div>
+		</div>
+
+</div>

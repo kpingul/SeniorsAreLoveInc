@@ -1,0 +1,57 @@
+<div class="container db-container">
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Welcome back, {{user.fName}}</h4>
+
+			<h6>My Listings |
+				<a ui-sref="familyProfileView">View Post</a>
+				<span class="right">
+					<a ng-if="!user.patient" ui-sref="familyProfileAddJob">Add Job</a>
+				</span>
+			</h6>
+
+			
+				<div class="media" style="    background: #F1F1F1;padding: 30px" ng-if="user.patient">
+					  <div class="media-left">
+					    <a ui-sref="familyProfileEditJob">
+					    	<strong>Edit Post</strong>
+					    </a>
+					  </div>
+					  <div class="media-body">
+					    <h4 class="media-heading">Care Needed in {{user.locationOfPatient}}, CA for {{user.patient}}</h4>
+					    <p>{{user.hoursPerWeekCare}}hrs/Week</p>
+					    <p>{{user.timesOfDayCare}}</p>
+					  </div>
+				</div>
+
+			
+		</div>
+
+		<div class="col-md-12">
+			<h6>My Messages</h6>
+			<table class="table">
+    <thead>
+      <tr>
+        <th>user</th>
+        <th>message</th>
+        <th>profile</th>
+        <th>contact</th>
+<!--         <th>remove</th>
+ -->      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="message in user.patientMessages track by $index">
+        <td>{{message.fromFName}} {{message.fromLName}}</td>
+        <td>{{message.message}}</td>
+        <td><a ui-sref="caregiverProfile({id: message.fromId})">View</a></td>
+        <td><a ui-sref="messageCareGiver({id: message.fromId})">Reply</a></td>
+<!--         <td><a href=""><i class="fa fa-trash"></i></a></td>
+ -->      </tr>
+      <tr>
+        
+    </tbody>
+  </table>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="row cg-profile-row">
+	<h4 >About You</h4>
+	<p>When families choose caregivers, they often like to read this section to learn if there is a good fit.</p>
+
+	<form ng-submit="updateAbout()">
+
+
+    <div class="form-group">
+
+        <label>About</label>
+        <textarea name="about" id="" ng-model="user.about" cols="30" rows="10" class="form-control"placeholder='What makes you a great caregiver? Why did you become a caregiver? What do you like about being a caregiver?'></textarea>
+       
+    </div>
+  
+    <a ui-sref="careGiverProfile" class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-danger">Update <i ng-if="aboutSubmitted" class="fa fa-spinner fa-spin"></i></button>
+	</form> 
+		
+</div>

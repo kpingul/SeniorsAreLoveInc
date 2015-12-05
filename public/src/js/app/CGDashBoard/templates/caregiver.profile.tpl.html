@@ -1,0 +1,140 @@
+<div class="container db-container">
+	<div class="row">
+		
+		<div class="col-xs-4 col-sm-6 col-md-6">
+		<center>	
+			<a href="">
+				
+				<img src="/public/build/img/userlogo.jpg" width="140" class="img-responsive" alt="">
+				<p>Add Photo</p>
+				
+			</a>
+		</center>
+		</div>	
+
+		<div class="col-xs-8 col-sm-6 col-md-6 cg-profile-sub">
+			<div class="left" >
+				<p>{{user.fName}} {{user.lName}}</p >
+				<span>{{user.contact.city}}</span>
+				<h6><a ui-sref="careGiverViewProfile">View Profile</a></h6>
+				
+			</div>
+
+			<div class="right">
+				<a ui-sref="careGiverProfileEditPhoto">
+					
+				<span class="fa-stack fa-lg">
+				  <i class="fa fa-circle-thin fa-stack-2x"></i>
+				  <i class="fa fa-pencil fa-stack-1x"></i>
+				</span>		
+					
+				</a>
+			</div>
+
+		</div>
+		
+	</div>
+		
+		<hr/>
+
+		<div class="row cg-basic-info-row">
+			<div class="col-sm-12">
+				
+					<h4>Basic Info 
+						<a class="right" ui-sref="careGiverProfileEditInformation">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle-thin fa-stack-2x"></i>
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+						</a>
+					</h4>
+					<p><i class="fa fa-lock"></i> Your contact information is secure and only used for vetting.</p>
+
+
+					<div ng-if="user.gender">
+						<h6>Gender</h6>
+						<p>{{::user.gender}}</p>
+					</div>
+
+					<div ng-if="user.phone">
+						<h6>Phone</h6>
+						<p>{{::user.phone}}</p>
+						
+					</div>
+					<div ng-if="user.contact">
+						<h6>Address</h6>
+						<p>{{::user.contact.city | uppercase}}, CA, {{::user.contact.zipCode}}</p>					
+					</div>
+
+						<hr/>
+
+
+					<h4>About 
+						<a class="right" ui-sref="careGiverProfileEditAbout">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle-thin fa-stack-2x"></i>
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+						</a>
+					</h4>
+					<div ng-if="user.about">
+						<p>{{user.about}}</p>
+						
+					</div>
+
+					<hr/>
+
+						<h4>Services 
+						<a class="right" ui-sref="careGiverProfileEditServices">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle-thin fa-stack-2x"></i>
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+						</a>
+					</h4>
+					<div ng-if="user.hourRate">
+						<h6>Hourly Rate</h6>
+						<p>${{user.hourRate}}</p>
+					</div>
+
+					<div ng-if="user.careType">
+						<h6>Type of Care</h6>
+						<p>{{user.careType}}</p>
+					</div>
+					<div ng-if="user.skills.length > 0">
+						<h6>Skills And Expertise</h6>
+							<span style="font-size: 1em; margin: 4px; padding: 8px; display: inline-block" class="label label-default" ng-repeat="service in user.skills track by $index">
+								{{service}}	
+							</span>
+					</div>
+
+					<hr />
+
+					<h4>Experience 
+						<a class="right" ui-sref="careGiverProfileEditExperience">
+							<span class="fa-stack fa-lg">
+								<i class="fa fa-circle-thin fa-stack-2x"></i>
+								<i class="fa fa-pencil fa-stack-1x"></i>
+							</span>
+						</a>
+					</h4>
+					
+					<div ng-if="user.yrsExp">
+						<h6>Years Experience</h6>
+						<p>{{user.yrsExp}}</p>
+						
+					</div>
+					<div ng-if="user.workExp.length > 0">
+								<h6>Work Experience</h6>
+								<address ng-repeat="exp in user.workExp track by $index">
+									{{exp.title}}<br>
+									{{exp.employer}}<br>
+									{{exp.start}} - {{exp.end}}<br>
+									{{exp.desc}}
+								</address>
+					</div>
+					<hr/>
+			</div>
+		</div>
+
+</div>

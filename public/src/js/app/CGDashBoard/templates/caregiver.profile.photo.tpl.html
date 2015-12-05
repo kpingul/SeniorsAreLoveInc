@@ -1,0 +1,22 @@
+<div class="row cg-profile-row">
+	<h4 >Profile Photo</h4>
+	<p>Click Choose File to select a photo from your computer or mobile device and then Click Upload to add your photo.</p>
+
+	<form ng-submit="updateAbout()">
+    <div class="form-group">
+					<a href="">
+				
+				<img src="/public/build/img/userlogo.jpg" width="140" class="img-responsive" alt="">
+				<p>Add Photo</p>
+				
+			</a>
+			
+			<input type="file">
+   
+    </div>
+  
+    <a ui-sref="careGiverProfile" class="btn btn-default">Cancel</a>
+    <button type="submit" class="btn btn-danger">Update <i ng-if="aboutSubmitted" class="fa fa-spinner fa-spin"></i></button>
+	</form> 
+		
+</div>

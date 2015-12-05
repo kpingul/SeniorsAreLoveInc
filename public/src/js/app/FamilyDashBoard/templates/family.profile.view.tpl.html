@@ -1,0 +1,27 @@
+<div class="container db-container">
+	<div class="row">
+		<div class="col-md-12">
+			<h3>Caregiver needed in {{family.locationOfPatient}},CA for {{family.patient}} <button class="btn btn-danger" ui-sref="familyProfileEditJob">Edit</button></h3>
+			<p style="font-weight: bold">{{family.locationOfPatient}}, CA  <strong>|</strong> Ideal start {{family.startDate}} <strong>|</strong> {{family.hoursPerWeekCare}}hrs/week <strong>|</strong> Job #{{family._id}}</p>
+
+			<h4>Job Description</h4>
+			<p>Need a reliable and experienced caregiver located near {{family.locationOfPatient}}, CA to help care for {{family.patient}}. I need help {{family.daysOfCare}} days per week in the {{family.timesOfDayCare}}. I would like the help to begin {{family.startDate}} and estimate {{family.hoursPerWeekCare}} hours per week.</p>
+			<hr/>
+			<h4>Care needs</h4>
+
+			<h5>Schedule</h5>
+			<p><strong>{{family.hoursPerWeekCare}}hrs/week</strong></p>
+			<p><strong>Ideally starting {{family.startDate}}</strong></p>
+			<p><strong>{{family.timesOfDayCare}}</strong></p>
+			<h5>Daily activities</h5>
+			<span style="font-size: 1em; margin: 4px; padding: 8px; display: inline-block" class="label label-default" ng-repeat="job in family.dailyActivities track by $index">
+								{{job}}	
+			</span>
+			<h5>Preferences</h5>
+			<p><strong>Care Type:</strong> {{family.preferCareType}}</p>
+			<p><strong>Gender:</strong> {{family.preferGender}}</p>
+			<hr/>
+
+		</div>
+	</div>
+</div>
