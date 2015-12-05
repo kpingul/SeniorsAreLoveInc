@@ -38,6 +38,7 @@ var UserModel = new Schema({
   preferGender: String,
   preferCareType: String,
 
+  cgImageUrl: String,
   cgMessages: [{
     fromId: String,
     fromFName: String,

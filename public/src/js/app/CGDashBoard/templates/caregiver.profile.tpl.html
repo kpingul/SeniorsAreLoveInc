@@ -5,8 +5,9 @@
 		<center>	
 			<a href="">
 				
-				<img src="/public/build/img/userlogo.jpg" width="140" class="img-responsive" alt="">
-				<p>Add Photo</p>
+				<img ng-src="/public/build/img/userlogo.png" ng-if="!user.cgImageUrl" width="190" class="img-responsive img-circle" alt="">
+				<img ng-src="{{user.cgImageUrl}}" ng-if="user.cgImageUrl"width="190" class="img-responsive img-circle" alt="">
+				<p ng-if="!user.cgImageUrl">Add Photo</p>
 				
 			</a>
 		</center>

@@ -3,8 +3,8 @@
 		<div class="col-md-12">
 			<h4>Welcome back, {{user.fName}}</h4>
 
-			<h6>My Listings |
-				<a ui-sref="familyProfileView">View Post</a>
+			<h6>My Listings 
+				<a ui-sref="familyProfileView" ng-if="user.patient">| View Post</a>
 				<span class="right">
 					<a ng-if="!user.patient" ui-sref="familyProfileAddJob">Add Job</a>
 				</span>

@@ -1,6 +1,6 @@
 (function() {
 	'use strict';
-      angular.module('CGDashBoard', ['ui.router'])
+      angular.module('CGDashBoard', ['ui.router',  'file-model'])
         .run(['$rootScope', function ($rootScope) {
           $rootScope.$on('$stateChangeSuccess',function(){
             $("html, body").animate({ scrollTop: 0 }, 0);
@@ -62,5 +62,38 @@
                 controller: 'MessageJob'
               })
         }])
+         .directive('previewImage', previewImage);
+
+          function previewImage() {    
+              var directive = {
+                  restrict: 'A',
+                  link: link
+              };
+
+              return directive;
+
+              function link(scope, elem, attrs) {
+
+                  if( attrs.data ) {
+
+                      //*bottleneck
+                      //use angular or jquery to manipulate DOM
+                      document.getElementById(attrs.data.split(" ")[0]).onchange = function () {
+                          var reader = new FileReader();
+
+                          reader.onload = function (e) {
+                              // get loaded data and render thumbnail.
+                              document.getElementById(attrs.data.split(" ")[1]).src = e.target.result;
+                          };
+
+                          // read the image file as a data URL.
+                          reader.readAsDataURL(this.files[0]);
+                      };
+                      
+                  }
+              
+              }
+              
+          }////////////////End of previewImage directive////////////////////   
 
 }());

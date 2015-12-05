@@ -8,7 +8,8 @@
 							<div class="media" style="    background: #F1F1F1;padding: 30px">
 								  <div class="media-left">
 								    <a ui-sref="caregiverProfile({id: caregiver._id})">
-								    	<img src="/public/build/img/userlogo.jpg" width="100" class="media-object"  alt="">
+								    	<img ng-src="/public/build/img/userlogo.png" ng-if="!caregiver.cgImageUrl" width="100" class="media-object" alt="">
+											<img ng-src="{{caregiver.cgImageUrl}}" ng-if="caregiver.cgImageUrl"width="100" class="media-object" alt="">
 								    </a>
 								  </div>
 								  <div class="media-body">

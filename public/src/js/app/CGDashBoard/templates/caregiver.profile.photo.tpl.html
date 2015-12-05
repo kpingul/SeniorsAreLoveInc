@@ -2,21 +2,15 @@
 	<h4 >Profile Photo</h4>
 	<p>Click Choose File to select a photo from your computer or mobile device and then Click Upload to add your photo.</p>
 
-	<form ng-submit="updateAbout()">
+	<form ng-submit="uploadPhoto(fileModel)">
     <div class="form-group">
-					<a href="">
-				
-				<img src="/public/build/img/userlogo.jpg" width="140" class="img-responsive" alt="">
+				<img id="ads_img_src" width="190" class="img-circle" preview-image data="ads_image ads_img_src" ng-src="{{user.cgImageUrl}}"/>
+				<input accept="image/*" type="file" name="file" id="ads_image" file-model="fileModel" enctype="multipart/form-data">
 				<p>Add Photo</p>
-				
-			</a>
-			
-			<input type="file">
-   
     </div>
   
     <a ui-sref="careGiverProfile" class="btn btn-default">Cancel</a>
-    <button type="submit" class="btn btn-danger">Update <i ng-if="aboutSubmitted" class="fa fa-spinner fa-spin"></i></button>
+    <button type="submit" class="btn btn-danger">Update <i ng-if="photoSubmitted" class="fa fa-spinner fa-spin"></i></button>
 	</form> 
 		
 </div>

@@ -13,6 +13,7 @@
         $scope.expSubmitted = false;
         $scope.skillsExpSubmitted = false;
         $scope.accountSubmitted = false;
+        $scope.photoSubmitted = false;
 
         /*
           @params
@@ -184,6 +185,38 @@
         $scope.removeSkill = function(index) {
           
           $scope.user.skills.splice(index, 1);
+        }
+
+        $scope.uploadPhoto = function(photo) {
+
+          var photoFile = photo;
+          var fd = new FormData();
+          fd.append('file', photoFile);
+          $scope.photoSubmitted = true;
+          $http
+            .post('/api/images', fd, 
+              {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .then(function( response ) {
+              if(response) {
+                var imageUrl = {
+                  cgImageUrl: response.data.path
+                };
+                  $http
+                    .post('/api/caregiver/' + $scope.user._id, imageUrl)
+                    .then(function(response) {
+                      $timeout(function() {
+                        $scope.photoSubmitted = false;
+                        $scope.user = response.data;
+                        $location.path('/profile');
+                        $scope.$apply();
+                      }, 0);
+                    });
+              }
+              return response;
+            })
         }
 
     }])

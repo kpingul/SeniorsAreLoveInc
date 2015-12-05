@@ -10,6 +10,7 @@
   "author": "kirck pingul",
   "license": "ISC",
   "dependencies": {
+    "azure-storage": "^0.6.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "connect-flash": "^0.1.1",
@@ -26,6 +27,8 @@
     "gulp-uglify": "^1.5.1",
     "method-override": "^2.3.5",
     "mongoose": "^4.2.8",
+    "multiparty": "^4.1.2",
+    "node-uuid": "^1.4.7",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "passport-local": "^1.0.0",
