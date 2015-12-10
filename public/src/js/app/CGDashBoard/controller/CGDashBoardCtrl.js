@@ -5,6 +5,8 @@
         //$scope.user reflects the data model
         //from the datbase and has two-way binding
         //with the templates within CGDashBaord
+
+        $scope.workExp2 = false;
         
         //varibles that allow for the loading
         //indicator to toggle when user submits forms
@@ -31,13 +33,14 @@
             .then(function(response) {
               $scope.user = response.data;
 
-              console.log($scope.user);
             });
           $http
             .get('/api/caregiverJobs')
             .then(function(response) {
-              $scope.caregiverJobs = response.data;
-              console.log($scope.caregiverJobs);
+              $scope.activeJobs = _.filter(response.data, function(job, index) {
+                return job.family.active == true;
+              });
+              console.log($scope.activeJobs);
             });
         }
 
@@ -47,10 +50,12 @@
           choice of gender in the profle information template
         */
         $scope.updateInformation = function(gender) {
+          $scope.informationSubmitted = true;
           //stores the users update 
           //information to an object
           //to query to the API
           var updatedCareGiver = {
+            cgActive: $scope.user.cgActive,
             gender: gender,
             contact: {
               address: $scope.user.contact.address,
@@ -62,25 +67,16 @@
           $http
             .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
             .then(function(response) {
-              //when the response comes back
-              //the loading indicator toggles to true
-              $scope.informationSubmitted = true;
-              $timeout(function() {
-                //when timeout executes the function
-                //the user data is updated and redirected
-                //to the profile section to view the udpated data
+              if( response ) {
                 $scope.informationSubmitted = false;
                 $scope.user = response.data;
-                $location.path('/profile');
-                //fires the digest cycle to 
-                //update the data in the main profile
-                $scope.$apply();
-              }, 300);
+                $location.path('/profile');                
+              }
             });
-          console.log(updatedCareGiver);
         };
 
         $scope.updateAbout = function() {
+          $scope.aboutSubmitted = false;
           var updatedCareGiver = {
             about: $scope.user.about
           };
@@ -88,16 +84,13 @@
             .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
             .then(function(response) {
               $scope.aboutSubmitted = true;
-              $timeout(function() {
-                $scope.aboutSubmitted = false;
                 $scope.user = response.data;
                 $location.path('/profile');
-                $scope.$apply();
-              }, 300);
             });
         };
 
         $scope.updateExperience = function() {
+          $scope.expSubmitted = true;
           var updatedCareGiver = {
             yrsExp: $scope.user.yrsExp,
             title: $scope.user.profExp.title,
@@ -110,17 +103,34 @@
           $http
             .post('/api/caregiver/experience/' + $scope.user._id, updatedCareGiver)
             .then(function(response) {
-              $scope.expSubmitted = true;
-              $timeout(function() {
+              if( response ) {
                 $scope.expSubmitted = false;
                 $scope.user = response.data;
                 $location.path('/profile');
-                $scope.$apply();
-              }, 300);
+              }
+            });
+        };
+
+        $scope.updateAllExperience = function() {
+            $scope.expSubmitted = true;
+           var updatedCareGiver = {
+            yrsExp: $scope.user.yrsExp,
+            workExp: $scope.user.workExp
+          };
+          $http
+            .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
+            .then(function(response) {
+              if( response ) {
+                $scope.expSubmitted = false;
+                $scope.user = response.data;
+                $location.path('/profile');
+              }
             });
         };
 
         $scope.updateAccount = function() {
+          $scope.accountSubmitted = true;
+          
           var updatedCareGiver = {
             fName: $scope.user.fName,
             lName: $scope.user.lName,
@@ -131,17 +141,17 @@
           $http
             .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
             .then(function(response) {
-              $scope.accountSubmitted = true;
-              $timeout(function() {
+              if( response ) {
                 $scope.accountSubmitted = false;
                 $scope.user = response.data;
                 $location.path('/profile');
-                $scope.$apply();
-              }, 300);
+              }
             });
         }
 
         $scope.updateSkillsExp = function() {
+          $scope.skillsExpSubmitted = true;
+          
           var updatedCareGiver = {
             hourRate: $scope.user.hourRate,
             careType: $scope.user.careType,
@@ -151,13 +161,11 @@
           $http
             .post('/api/caregiver/services/' + $scope.user._id, updatedCareGiver)
             .then(function(response) {
-              $scope.skillsExpSubmitted = true;
-              $timeout(function() {
+              if( response ) {
                 $scope.skillsExpSubmitted = false;
                 $scope.user = response.data;
                 $location.path('/profile');
-                $scope.$apply();
-              }, 300);
+              }
             });
 
 
@@ -187,38 +195,6 @@
           $scope.user.skills.splice(index, 1);
         }
 
-        $scope.uploadPhoto = function(photo) {
-
-          var photoFile = photo;
-          var fd = new FormData();
-          fd.append('file', photoFile);
-          $scope.photoSubmitted = true;
-          $http
-            .post('/api/images', fd, 
-              {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .then(function( response ) {
-              if(response) {
-                var imageUrl = {
-                  cgImageUrl: response.data.path
-                };
-                  $http
-                    .post('/api/caregiver/' + $scope.user._id, imageUrl)
-                    .then(function(response) {
-                      $timeout(function() {
-                        $scope.photoSubmitted = false;
-                        $scope.user = response.data;
-                        $location.path('/profile');
-                        $scope.$apply();
-                      }, 0);
-                    });
-              }
-              return response;
-            })
-        }
-
     }])
     .controller('CaregiverJobProfile', ['$scope','$http', '$stateParams', function ($scope, $http, $stateParams) {
 
@@ -233,6 +209,8 @@
       $scope.jobId = $stateParams.id;
       
       $scope.sendMessage = function() {
+        $scope.messageSubmitted = true;
+        
         var message = {
           fromId: $scope.$parent.user._id,
           fromFName: $scope.$parent.user.fName,
@@ -240,16 +218,13 @@
           to: $stateParams.id,
           message: $scope.message
         };
-        console.log(message);
         $http
           .post('/api/caregiverjob/message/' + $stateParams.id, message)
           .then(function(response) {
-              $scope.messageSubmitted = true;
-              $timeout(function() {
-                $scope.messageSubmitted = false;
-                $location.path('/profile');
-                $scope.$apply();
-              }, 300);
+            if( response ) {
+              $scope.messageSubmitted = false;
+              $location.path('/profile');
+            }
           });
         
       }

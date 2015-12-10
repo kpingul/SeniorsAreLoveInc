@@ -12,9 +12,9 @@
 
         <link rel="stylesheet" href="../public/build/css/stylesheet.min.css">
         <title>
-          In-Home Care Services | Log in
+          In-Home Care Serivces | Register Caregiver
         </title>
-     
+
     </head>
     <body data-spy="scroll" data-target="#navbar">
 
@@ -65,39 +65,43 @@
 
         <div class="row" style="padding: 40px">
             <div class="col-md-6" style="background: #fff; padding: 50px 30px">
-              <h3 style="text-transform: initial; text-align: center; padding-bottom: 40px">Apply to be a SeniorsAreLove caregiver</h3>
+              <h3 style="text-transform: initial; text-align: center; padding-bottom: 40px">Apply to be a SeniorsAreLove caregiver and start creating opportunities today!</h3>
+                <% if (message.length) { %>
+                <div class="alert alert-danger"><%= message %></div>
+              <% } %>
+
               
-              <form class="form-horizontal" method="post" action="/register/caregiver/" enctype="application/x-www-form-urlencoded">
+              <form class="form-horizontal" data-ajax="false"  id="registerCgForm" method="post" action="/register/caregiver" enctype="application/x-www-form-urlencoded">
                 <div class="form-group">
-                  <label for="inputEmail3">Email</label>
+                  <label for="email">Email</label>
               
-                    <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
               
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3">First Name</label>
-                    <input type="text" class="form-control" name="fName" id="inputEmail3" placeholder="First Name">
+                  <label for="fName">First Name</label>
+                    <input type="text" class="form-control" name="fName" id="fName" placeholder="First Name" required>
                 </div>
                  <div class="form-group">
-                  <label for="inputEmail3">Last Name</label>
-                    <input type="text" class="form-control" name="lName" id="inputEmail3" placeholder="Last Name">
+                  <label for="lName">Last Name</label>
+                    <input type="text" class="form-control" name="lName" id="lName" placeholder="Last Name" required >
                 </div>  
                 <div class="form-group">
-                  <label for="inputEmail3">City</label>
-                    <input type="text" class="form-control" name="city" id="inputEmail3" placeholder="City">
+                  <label for="city">City</label>
+                    <input type="text" class="form-control" name="city" id="city" placeholder="City" required >
                 </div> 
                 <div class="form-group">
-                  <label for="inputEmail3">Zip Code</label>
-                    <input type="text" class="form-control" name="zipCode" id="inputEmail3" placeholder="ZipCode">
+                  <label for="zipcode">Zip Code</label>
+                    <input type="text" class="form-control zipcode" name="zipCode" id="zipcode" placeholder="ZipCode"required >
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" >Password</label>
-                    <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+                  <label for="password" >Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 </div>
               
                 <div class="form-group">
           
-                    <button type="submit" class="btn btn-danger btn-block">Get Started</button>
+                    <input class="btn btn-danger btn-block" type="submit" value="Get Started" data-role="none">
             
                 </div>
               </form>
@@ -145,7 +149,18 @@
 
    <!-- libs -->
     <script src="../public/build/libs/deps.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>
+    <script>
+      $(document).ready(function() {
+        jQuery.validator.addMethod('zipcode', function(value, element) {
+          return this.optional(element) || !!value.trim().match(/^\d{5}(?:[-\s]\d{4})?$/);
+        }, 'Invalid zip code');
+        
+        $("#registerCgForm").validate();
+
+      });
+
+    </script>
     <!-- Google Analytics -->
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

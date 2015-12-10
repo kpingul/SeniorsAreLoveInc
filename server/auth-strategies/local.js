@@ -1,5 +1,5 @@
 'use strict';
-var UserModel     = require('./Users'),
+var UserModel     = require('./../models/Users'),
     LocalStrategy = require('passport-local').Strategy;
 
 module.exports = new LocalStrategy({
@@ -12,13 +12,16 @@ module.exports = new LocalStrategy({
     // provided in the callback is available
     process.nextTick(function() {
       // DB call for a specific user based on the email
-      UserModel.findOne({ email: userEmail } , function(err, user) {
-        if(err) {
+      UserModel
+      .findOne({ email: userEmail})
+      .select('+password')
+      .exec(function(err, user) {
+         if(err) {
           return done(err);
         }
         if(!user) {
           console.log('email is invalid');
-          return done(null, false,  req.flash('loginMessage', 'Email is valid, please try again'));
+          return done(null, false,  req.flash('loginMessage', 'Email is invalid, please try again'));
         }
         if(!user.validPassword(userPassword)) {
           console.log('password is invalid');

@@ -3513,7 +3513,6 @@ fieldset[disabled] .btn-link:focus {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px;
 }
 .btn-xs,
 .btn-group-xs > .btn {
@@ -4568,10 +4567,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #777;
 }
 .navbar-default .navbar-nav > li > a {
-  color: #123149;
   text-transform: uppercase;
-  font-weight: 500;
   text-align: center;
+  color: #EB7A7A;
+  font-weight: bold;
 
 }
 .navbar-default .navbar-nav > li > a:hover,

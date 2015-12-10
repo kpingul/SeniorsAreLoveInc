@@ -1,5 +1,8 @@
 'use strict';
-var UserModel = require('./Users'),
+var UserModel = require('./models/Users'),
+    cloudinary = require('cloudinary'),
+    multer     = require('multer'),
+    upload 		 = multer({dest: './uploads/'}),
 		passport = require('passport');
 
 module.exports = function(app, config) {
@@ -21,6 +24,34 @@ module.exports = function(app, config) {
 		res.render('signup');
 	});
 
+	cloudinary.config({ 
+  	cloud_name: 'seniorsreloveinc', 
+  	api_key: '869915418475518', 
+  	api_secret: 'KA9ffHIuCK1gXN-c0UZzWRwfTpI' 
+	});
+
+
+	app.post('/api/images', upload.single('photo'), function (req, res) {
+	 
+	  cloudinary.uploader.upload(req.file.path, function(result) { 
+	 	 if(result) {
+	 	 	UserModel.findOne({_id: req.user._id}, function(err, user) {
+	 	 		if(err) {
+	 	 			res.sendStatus(err);
+	 	 		}
+	 	 		user.cgImageUrl = result.url;
+	 	 		user.save(function(err) {
+	 	 			if(err)
+	 	 				console.log(err);
+	 	 			res.redirect('/caregiver/dashboard/')
+	 	 		});
+	 	 	});
+	 	 } 
+		}, {angle: 'exif'});
+
+	 });
+
+
 	/* _____________________*/
 	/* Auth Strategy routes  */
 	/* _____________________*/
@@ -37,14 +68,6 @@ module.exports = function(app, config) {
 	  		
 	  	});
 
-	app.get('/auth/facebook',
-	  passport.authenticate('facebook', {scope: 'email'} ));
-
-	app.get('/auth/facebook/callback',
-	  passport.authenticate('facebook', { failureRedirect: '/login' }),
-	  function(req, res) {
-	    res.redirect('/caregiver/dashboard/');
-	  });
 
 
 
@@ -64,20 +87,22 @@ module.exports = function(app, config) {
 			res.send(careGivers);
 			
 		});
-	});	
+	});		
+
 	app.get('/api/caregiverJobs', function(req, res) {
 		UserModel.find({}, function(err, users) {
-			var families = [];
+			var family = [];
 			if(err)
 				res.sendStatus(err)
 			users.forEach(function(user, index) {
 				if(user.position == 'family')
-					families.push(user);
+					family.push(user);
 			});
-			res.send(families);
+			res.send(family);
 			
 		});
-	});
+	});	
+
 
 	/*
 		A message sent to the family of the job position from
@@ -89,7 +114,7 @@ module.exports = function(app, config) {
 			if(err)
 				res.sendStatus(err);
 			console.log(user);
-			user.patientMessages.push({
+			user.family.patientMessages.push({
 				fromId: req.body.fromId,
 				fromFName: req.body.fromFName,
 				fromLName: req.body.fromLName,
@@ -130,34 +155,46 @@ module.exports = function(app, config) {
 	/* _____________________*/
 
 	app.get('/register/family', function(req, res) {
-		res.render('registerFamily');
+		res.render('registerFamily', { message: req.flash('register') });
 	});
 
 	app.post('/register/family', function(req, res) {
-			var newFamily = new UserModel({
-				position: 'family',
-				email: req.body.email,
-				fName: req.body.fName,
-				lName: req.body.lName,
-				contact: {
-					city: req.body.city,
-					zipCode: req.body.zipCode
+
+			UserModel.findOne({email: req.body.email}, function(err, user) {
+				if(err) {
+					res.sendStatus(err);
 				}
-			});
+				if(user) {
+					req.flash('register', 'Email Already Exists!')
+					res.redirect('/register/family');
+				} 
+				if(!user) {
+					var newFamily = new UserModel({
+						position: 'family',
+						email: req.body.email,
+						fName: req.body.fName,
+						lName: req.body.lName,
+						contact: {
+							city: req.body.city,
+							zipCode: req.body.zipCode
+						}
+					});
 
-			newFamily.password = newFamily.generateHash(req.body.password)
-
-			newFamily.save(function(err) {
-				if(err) res.sendStatus(err);
-				
-				req.login(newFamily, function(err) {
-	        if (err) {
-	          console.log(err);
-	        }
-					console.log('successfully registered ' + newFamily.fName);
-	        return res.redirect('/family/dashboard/');
-      	});
-				
+					newFamily.password = newFamily.generateHash(req.body.password)
+					newFamily.save(function(err) {
+						if(err) res.sendStatus(err);
+						
+						req.login(newFamily, function(err) {
+			        if (err) {
+			          console.log(err);
+			        }
+							console.log('successfully registered ' + newFamily.fName);
+			        return res.redirect('/family/dashboard/');
+		      	});
+						
+					});
+				}
+					
 			});
 	});
 
@@ -190,35 +227,48 @@ module.exports = function(app, config) {
 	/* _____________________*/
 
 	app.get('/register/caregiver', function(req, res) {
-		res.render('registerCaregiver');
+		res.render('registerCaregiver',  { message: req.flash('register') });
 	});
 
 	app.post('/register/caregiver', function(req, res) {
 
-			var newCareGiver = new UserModel({
-				position: 'caregiver',
-				email: req.body.email,
-				fName: req.body.fName,
-				lName: req.body.lName,
-				contact: {
-					city: req.body.city,
-					zipCode: req.body.zipCode
-				}
-			});
+		UserModel.findOne({email: req.body.email}, function(err, user) {
+			if(err) {
+				res.sendStatus(err);
+			}
+			if(user) {
+				req.flash('register', 'Email Already Exists!')
+				res.redirect('/register/caregiver');
+			} 
+			if(!user) {
+				var newCareGiver = new UserModel({
+					position: 'caregiver',
+					email: req.body.email,
+					fName: req.body.fName,
+					lName: req.body.lName,
+					contact: {
+						city: req.body.city,
+						zipCode: req.body.zipCode
+					}
+				});
 
-			newCareGiver.password = newCareGiver.generateHash(req.body.password)
-			newCareGiver.save(function(err) {
-				if(err) res.sendStatus(err);
+				newCareGiver.password = newCareGiver.generateHash(req.body.password)
+				newCareGiver.save(function(err) {
+					if(err) res.sendStatus(err);
+					
+					req.login(newCareGiver, function(err) {
+		        if (err) {
+		          console.log(err);
+		        }
+						console.log('successfully registered ' + newCareGiver.fName);
+		        return res.redirect('/caregiver/dashboard/');
+	      	});
+					
+				});
+			}
 				
-				req.login(newCareGiver, function(err) {
-	        if (err) {
-	          console.log(err);
-	        }
-					console.log('successfully registered ' + newCareGiver.fName);
-	        return res.redirect('/caregiver/dashboard/');
-      	});
-				
-			});
+		});
+
 	});
 
 	/* _____________________*/

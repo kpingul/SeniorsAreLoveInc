@@ -5,9 +5,18 @@
 		<h5>Care Needs</h5>
 		
 			<form>
+
+					<div class="form-group">
+						<div class="radio">
+						  <label><input type="radio" name="Active" ng-model="user.family.active" ng-value="true">Active</label>
+						</div>
+						<div class="radio">
+						  <label><input type="radio" name="In-active" ng-model="user.family.active" ng-value="false">In-active</label>
+						</div>
+					</div>
 					<div class="form-group">
 					  <label for="care">Who Needs Care?</label>
-						<select name="" id="" class="form-control" ng-model="user.patient">
+						<select name="" id="" class="form-control" ng-model="user.family.patient">
 							<option value=""></option>
 							<option value="Grandmother">My Grandmother</option>
 							<option value="Grandfather">My Grandfather</option>
@@ -22,24 +31,24 @@
 
 				    <div class="form-group">
 				    	<label for="location">Location of Care Needed</label>
-				    	<input type="text" class="form-control" placeholder="eg: Daly City" ng-model="user.locationOfPatient">
+				    	<input type="text" class="form-control" placeholder="eg: Daly City" ng-model="user.family.locationOfPatient">
 				    </div>
 				    <div class="form-group">
 				    	<label for="location">Primary Number Of Care</label>
-				    	<input type="text" class="form-control" placeholder="eg: (415)312-1111" ng-model="user.contactOfPatient">
+				    	<input type="text" class="form-control" placeholder="eg: (415)312-1111" ng-model="user.family.contactOfPatient">
 				    </div>
 
 			    <div class="form-group">
 			      <label>What daily activities do they need help with?</label>
 			      <div class="input-group">
-			    		<input type="text" class="form-control" placeholder="eg: Managing Medications" ng-model="user.newActivity">
+			    		<input type="text" class="form-control" placeholder="eg: Managing Medications" ng-model="user.family.newActivity">
 			    		<div class="input-group-btn">
-			        	<button style="padding: 6px"class="btn btn-danger btn-md" ng-click="addActivity(user.newActivity)" >Add Activity</button>
+			        	<button style="padding: 6px"class="btn btn-danger btn-md" ng-click="addActivity(user.family.newActivity)" >Add Activity</button>
 			      	</div>
 						</div>
 						
 						<div style="padding: 10px 0px">
-							<span style="font-size: 1em; margin: 4px; padding: 12px; display: inline-block" class="label label-default" ng-repeat="activity in user.dailyActivities track by $index">
+							<span style="font-size: 1em; margin: 4px; padding: 12px; display: inline-block" class="label label-default" ng-repeat="activity in user.family.dailyActivities track by $index">
 								{{activity}}		<span style="cursor: pointer" ng-click="removeActivity($index)" >X</span>	
 							</span>
 						</div>
@@ -51,21 +60,21 @@
 					  <label for="schedule">When would you like the care to begin?</label>
 					    <div class="input-group">
 				      	<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-				      	<input type="text" class="form-control" placeholder="12/22/14" ng-model="user.startDate">
+				      	<input type="text" class="form-control" placeholder="12/22/14" ng-model="user.family.startDate">
 				    </div>
 					</div>
 
 					<div class="form-group">
 						<label for="daysOfCare">How many days of care are needed each week?</label>
 						<div class="input-group">
-							<input type="text" class="form-control" ng-model="user.daysOfCare">
+							<input type="text" class="form-control" ng-model="user.family.daysOfCare">
 							<div class="input-group-addon">days</div>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="timeOfCare">What time(s) of day is care needed?</label>
-						<select name="" id="" class="form-control" ng-model="user.timesOfDayCare">
+						<select name="" id="" class="form-control" ng-model="user.family.timesOfDayCare">
 							<option value="Morning">Morning</option>
 							<option value="Afternoon">Afternoon</option>
 							<option value="Evening">Evening</option>
@@ -81,7 +90,7 @@
 					<div class="form-group">
 						<label for="hoursPerWeek">How many hours per week of care are required?</label>
 						<div class="input-group">
-							<input type="text" class="form-control" ng-model="user.hoursPerWeekCare">
+							<input type="text" class="form-control" ng-model="user.family.hoursPerWeekCare">
 							<div class="input-group-addon">hour/week</div>
 						</div>
 					</div>
@@ -90,7 +99,7 @@
 
 					 <div class="form-group">
 						<label for="gender">My caregiver is..</label>
-						<select name="" id="" class="form-control" ng-model="user.preferGender">
+						<select name="" id="" class="form-control" ng-model="user.family.preferGender">
 							<option value=""></option>
 							<option value="female">Female</option>
 							<option value="male">Male</option>
@@ -101,7 +110,7 @@
 
 					 <div class="form-group">
 						<label for="gender">Should be living..</label>
-						<select name="" id="" class="form-control" ng-model="user.preferCareType">
+						<select name="" id="" class="form-control" ng-model="user.family.preferCareType">
 							<option value="live-out">In their own home (Live-out)</option>
 							<option value="live-in">In our family's home (Live-in)</option>
 						</select>

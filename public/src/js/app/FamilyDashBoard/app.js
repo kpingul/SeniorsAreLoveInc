@@ -44,6 +44,10 @@
             url :'/caregiver/message/:id',
             templateUrl: "/public/src/js/app/FamilyDashBoard/templates/messageCareGiver.tpl.html",
             controller: 'MessageCareGiver'
+          })  
+          .state('inbox', {
+            url :'/inbox',
+            templateUrl: "/public/src/js/app/FamilyDashBoard/templates/inbox.tpl.html"
           })
 
 

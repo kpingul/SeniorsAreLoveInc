@@ -3,9 +3,9 @@
     <head>
         <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39">
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" href="../icon.png">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="icon" type="image/png" href="../icon.png">        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
         <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
@@ -65,39 +65,43 @@
 
         <div class="row" style="padding: 40px">
             <div class="col-md-6" style="background: #fff; padding: 50px 30px">
-              <h3 style="text-transform: initial; text-align: center; padding-bottom: 40px">Find care for your family</h3>
-              
-              <form class="form-horizontal" method="post" action="/register/family/" enctype="application/x-www-form-urlencoded">
+              <h3 style="text-transform: initial; text-align: center; padding-bottom: 40px">Sign up and find the perfect caregiver for your loved one today!</h3>
+              <% if (message.length) { %>
+                <div class="alert alert-danger"><%= message %></div>
+              <% } %>
+
+               
+              <form class="form-horizontal" data-ajax="false"  id="registerFamilyForm" method="post" action="/register/family" enctype="application/x-www-form-urlencoded">
                 <div class="form-group">
-                  <label for="inputEmail3">Email</label>
+                  <label for="email">Email</label>
               
-                    <input type="email" class="form-control" name="email" id="inputEmail3" placeholder="Email">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
               
                 </div>
                 <div class="form-group">
-                  <label for="inputEmail3">First Name</label>
-                    <input type="text" class="form-control" name="fName" id="inputEmail3" placeholder="First Name">
+                  <label for="fName">First Name</label>
+                    <input type="text" class="form-control" name="fName" id="fName" placeholder="First Name" required>
                 </div>
                  <div class="form-group">
-                  <label for="inputEmail3">Last Name</label>
-                    <input type="text" class="form-control" name="lName" id="inputEmail3" placeholder="Last Name">
+                  <label for="lName">Last Name</label>
+                    <input type="text" class="form-control" name="lName" id="lName" placeholder="Last Name" required >
                 </div>  
                 <div class="form-group">
-                  <label for="inputEmail3">City</label>
-                    <input type="text" class="form-control" name="city" id="inputEmail3" placeholder="City">
+                  <label for="city">City</label>
+                    <input type="text" class="form-control" name="city" id="city" placeholder="City" required >
                 </div> 
                 <div class="form-group">
-                  <label for="inputEmail3">Zip Code</label>
-                    <input type="text" class="form-control" name="zipCode" id="inputEmail3" placeholder="ZipCode">
+                  <label for="zipcode">Zip Code</label>
+                    <input type="text" class="form-control zipcode" name="zipCode" id="zipcode" placeholder="ZipCode"required >
                 </div>
                 <div class="form-group">
-                  <label for="inputPassword3" >Password</label>
-                    <input type="password" class="form-control" name="password" id="inputPassword3" placeholder="Password">
+                  <label for="password" >Password</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
                 </div>
               
                 <div class="form-group">
           
-                    <button type="submit" class="btn btn-danger btn-block">Get Started</button>
+                    <input class="btn btn-danger btn-block" type="submit" value="Get Started" data-role="none">
             
                 </div>
               </form>
@@ -145,6 +149,19 @@
 
    <!-- libs -->
     <script src="../public/build/libs/deps.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.js"></script>
+    <script>
+      $(document).ready(function() {
+        jQuery.validator.addMethod('zipcode', function(value, element) {
+          return this.optional(element) || !!value.trim().match(/^\d{5}(?:[-\s]\d{4})?$/);
+        }, 'Invalid zip code');
+        
+        $("#registerFamilyForm").validate();
+
+      });
+
+    </script>
+
     
     <!-- Google Analytics -->
     <script>
@@ -160,3 +177,5 @@
 
     </body>
 </html>
+
+

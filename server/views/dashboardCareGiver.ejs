@@ -3,7 +3,7 @@
     <head>
         <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39">
         <meta charset="UTF-8">
-        <link rel="icon" type="image/png" href="../icon.png">
+        <link rel="icon" type="image/png" href="../../icon.png">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="/public/build/css/stylesheet.min.css">
         <title>
-          CareGiver| Dashboard
+          CareGiver | Dashboard
         </title>
     </head>
     <body data-spy="scroll" data-target="#navbar" ng-controller="CGDashBoardCtrl">
@@ -64,7 +64,7 @@
           <ul  class="list-inline" style="color: #FF6060">
             <li ><a ui-sref-active="active" ui-sref="careGiverProfile">Profile</a></li>
             <li ><a ui-sref-active="active" ui-sref="caregiverJobs">Browse Jobs</a></li>
-            <li ><a ui-sref-active="active" ui-sref="inbox">Messages</a></li>
+            <li ><a ui-sref-active="active" ui-sref="inbox">Messages<span class="messageAlert">{{user.cgMessages.length}}</span></a></li>
             <li ><a ui-sref-active="active" ui-sref="careGiverProfileSettings">Settings</a></li>
           </ul>
         </div><!-- end of row -->
@@ -130,6 +130,8 @@
 
     <script src="/public/build/libs/deps.min.js"></script>
     <script src='/bower_components/angular-file-model/angular-file-model.js'></script>
+    <script src="/bower_components/underscore/underscore-min.js"></script>
+
     
     <!-- scripts -->
     

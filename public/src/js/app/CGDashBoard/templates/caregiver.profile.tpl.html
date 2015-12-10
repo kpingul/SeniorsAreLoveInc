@@ -3,10 +3,14 @@
 		
 		<div class="col-xs-4 col-sm-6 col-md-6">
 		<center>	
-			<a href="">
+			<a ui-sref="careGiverProfileEditPhoto">
 				
-				<img ng-src="/public/build/img/userlogo.png" ng-if="!user.cgImageUrl" width="190" class="img-responsive img-circle" alt="">
-				<img ng-src="{{user.cgImageUrl}}" ng-if="user.cgImageUrl"width="190" class="img-responsive img-circle" alt="">
+				<img ng-src="/public/build/img/userlogo.png" ng-if="!user.cgImageUrl" width="230" class="img-responsive img-circle" alt="">
+				
+				<div>
+					
+				</div>
+					<img ng-src="{{user.cgImageUrl}}" ng-if="user.cgImageUrl" width="230" class="img-responsive img-circle" alt="">
 				<p ng-if="!user.cgImageUrl">Add Photo</p>
 				
 			</a>
@@ -51,11 +55,17 @@
 					</h4>
 					<p><i class="fa fa-lock"></i> Your contact information is secure and only used for vetting.</p>
 
+					<div>
+						<h6>Status(Job Visibility)</h6>
+						<p ng-if="user.cgActive">Active</p>
+						<p ng-if="!user.cgActive">In-Active</p>
+					</div>
 
 					<div ng-if="user.gender">
 						<h6>Gender</h6>
 						<p>{{::user.gender}}</p>
 					</div>
+
 
 					<div ng-if="user.phone">
 						<h6>Phone</h6>

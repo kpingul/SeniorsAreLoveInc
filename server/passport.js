@@ -1,12 +1,10 @@
 'use strict';
 var passport 		= require('passport'),
-	UserModel   	= require('./Users'),
-	facebook 			= require('./facebook'),
-	local    			= require('./local');
+	UserModel   	= require('./models/Users'),
+	local    			= require('./auth-strategies/local');
 
 module.exports = function() {
 
-	passport.use(facebook);
 	passport.use(local);
 	// Passport session setup.
 	//   To support persistent login sessions, Passport needs to be able to

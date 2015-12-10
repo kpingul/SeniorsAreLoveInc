@@ -4,8 +4,18 @@
 		<p>Your full address will not be viewable in your profile. This info is used for our vetting process.</p>
 
 		<form ng-submit="updateInformation(user.gender)">
+			<div class="form-group">
+				<p>Setting your status to active will allow your profile to be seen by clients.</p>
+				<div class="radio">
+				  <label><input type="radio" name="Active" ng-model="user.cgActive" ng-value="true">Active</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="In-active" ng-model="user.cgActive" ng-value="false">In-active</label>
+				</div>
+			</div>
 
 			<div class="form-group">
+
 			  <label for="gender">Gender</label>
 			  <select class="form-control" id="gender" ng-model="user.gender">
 			    <option value="male" selected>Male</option>

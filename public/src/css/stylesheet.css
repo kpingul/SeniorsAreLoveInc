@@ -10,12 +10,20 @@ color: #123149;
 .mainColor{
 	color: #FF6060;
 }
+
 html {
 	position: relative;
 	min-height: 100%;
 }
 body {
 	margin: 0 0 50px; /* bottom = footer height */
+}
+.center{
+	margin: 0 auto;
+}
+.half{
+	width: 75%;
+
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: 'Montserrat', sans-serif; font-weight:700;
@@ -76,8 +84,7 @@ input:-webkit-autofill:focus {
 	color: white;
 	text-transform: uppercase;
 	margin: 0;
-	-webkit-clip-path: polygon(0 0%, 100% 0, 100% 100%, 0% 85%);
-  clip-path: url(#poly);
+
 	overflow: hidden;
   
 }
@@ -97,6 +104,8 @@ input:-webkit-autofill:focus {
 #main-wrapper {
 	margin-top: 0;
 	padding: 0;
+	text-align: center;
+
 }
 .main-content {
 	padding-top: 25px;
@@ -236,6 +245,10 @@ footer a:hover{
 .line{
 	width:25%;text-align:left;margin:10px 0; border:2.5px solid #EC6161;
 }
+.line-desc{
+	
+	width:25%;text-align:left;margin: auto; border:2.5px solid #EC6161;
+}
 
 .buttonSubmit{
   display:inline-block;
@@ -305,10 +318,16 @@ footer a:hover{
 .header-review {
 	    font-weight: 500;
 	font-size: 0.8em; 
-	margin-top: 90px;
+	margin-top: 60px;
 	font-style: italic;
 }
+.header-opp{
+	float: right;
+	background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    color: #151515;
 
+}
 /*
 
 DashBoard Template
@@ -344,6 +363,17 @@ CareGiver Profile Template
 .cg-family-cgprofile{
 	padding: 80px;
 }
+.messageAlert{
+    font-size: 1em;
+    font-weight: 700;
+    position: relative;
+  	bottom: 10px;
+    left: -6px;
+    padding: 2px 7px;
+    background: #fff;
+    border-radius: 52%;
+}
+}
 
 
 @media (max-width: 998px) {
@@ -370,6 +400,9 @@ CareGiver Profile Template
 	}
 	.logo{
 		width: 50%;
+	}
+	.main-content{
+		margin-bottom: 180px
 	}
 }
 
@@ -413,7 +446,11 @@ CareGiver Profile Template
 		background: rgba(26,29,37,.4)
 	}
 	.header-review {
-		margin-top: 170px;
+		margin-top: 150px;
+	}
+	.header-opp{
+		float: initial;
+		text-align: center;
 	}
 	.cg-profile-row{
 		width: 100%;
@@ -425,7 +462,7 @@ CareGiver Profile Template
 		display: block;
 	}
 	.media-left, .media-right, .media-body{
-		display: table-row;
+		display: inline;
 		text-align: center;
 	}
 	.media-object{
@@ -436,6 +473,12 @@ CareGiver Profile Template
 	.cg-family-cgprofile{
     padding: 15px;
 	}
+	.cg-jobs-view{
+		display: block;
+		float: initial;
+		text-align: center;
+	}
+
 
 }
 @media (max-width: 545px) {
@@ -443,7 +486,7 @@ CareGiver Profile Template
 		    margin-top: 50px;
 	}
 	.header-review{
-		margin-top: 130px;
+		margin-top: 77px
 	}
 
 }
@@ -465,6 +508,14 @@ CareGiver Profile Template
 
 	}
 
+	.list-inline > li {
+		width: 100%;
+		padding: 20px;
+	}
+.list-inline > li > a {
+		font-size: 0.9em;
+		padding: 10px;
+	}
 
 }
 @media (max-width: 433px) {
@@ -474,7 +525,13 @@ CareGiver Profile Template
 }
 @media (max-width: 414px) {
 	.form-bottom {
-		    padding-bottom: 290px;
+		padding-bottom: 290px;
+	}
+	
+}
+@media (max-width: 400px) {
+	.list-inline > li > a {
+		font-size: 0.8em;
 	}
 }
 

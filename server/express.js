@@ -35,6 +35,7 @@ module.exports = function(app) {
 	  // middleware that allows for error handling 
 	  // messaging to occur within the login section
 	  app.use(flash());
+
 	 	// middleware to allow for cookies
 	  app.use(cookieParser());
 	  // middleware that allows to parse the body of 

@@ -62,7 +62,7 @@
                 controller: 'MessageJob'
               })
         }])
-         .directive('previewImage', previewImage);
+        .directive('previewImage', previewImage)
 
           function previewImage() {    
               var directive = {
@@ -94,6 +94,7 @@
               
               }
               
-          }////////////////End of previewImage directive////////////////////   
+          }
+   
 
 }());

@@ -14,19 +14,19 @@
               .then(function(response) {
                 $scope.user = response.data;
                 $scope.family = response.data;
-                console.log($scope.user);
                 
               });
             $http
               .get('/api/caregivers/')
               .then(function(response) {
                 $scope.caregivers = response.data;
-                console.log($scope.caregivers);
-                
+                $scope.activeCg = _.where(response.data, {cgActive: true});
               });
           }
 
           $scope.updateAccount = function() {
+            $scope.accountSubmitted = true;
+            
             var updatedCareGiver = {
               fName: $scope.user.fName,
               lName: $scope.user.lName,
@@ -37,77 +37,84 @@
             $http
               .post('/api/family/' + $scope.user._id, updatedCareGiver)
               .then(function(response) {
-                $scope.accountSubmitted = true;
-                $timeout(function() {
-                  $scope.accountSubmitted = false;
+                if( response ) {
                   $scope.user = response.data;
                   $location.path('/profile');
-                  $scope.$apply();
-                }, 300);
+                  $scope.accountSubmitted = false;
+                }          
+           
               });
           }
 
           $scope.addActivity = function(newActivity) {
-            if( $scope.user.newActivity = "" ) 
-              return;
-
-            $scope.user.dailyActivities.push(newActivity);
-            $scope.user.newActivity = "";
+            if( newActivity == "" ) return;
+              
+            $scope.user.family.dailyActivities.push(newActivity);
+            $scope.user.family.newActivity = "";
           }
 
           $scope.removeActivity = function(index) {
-            $scope.user.dailyActivities.splice(index, 1);
+            $scope.user.family.dailyActivities.splice(index, 1);
           }
 
           $scope.saveJob = function() {
+            $scope.jobSubmitted = false;
+            
             var updatedCareGiver = {
-              patient: $scope.user.patient,
-              contactOfPatient: $scope.user.contactOfPatient,
-              locationOfPatient: $scope.user.locationOfPatient,
-              dailyActivities: $scope.user.dailyActivities,
-              startDate: $scope.user.startDate,
-              timesOfDayCare: $scope.user.timesOfDayCare,
-              daysOfCare: $scope.user.daysOfCare,
-              hoursPerWeekCare: $scope.user.hoursPerWeekCare,
-              preferGender: $scope.user.preferGender,
-              preferCareType: $scope.user.preferCareType
+              family: {
+                active: true,
+                patient: $scope.user.family.patient,
+                contactOfPatient: $scope.user.family.contactOfPatient,
+                locationOfPatient: $scope.user.family.locationOfPatient,
+                dailyActivities: $scope.user.family.dailyActivities,
+                startDate: $scope.user.family.startDate,
+                timesOfDayCare: $scope.user.family.timesOfDayCare,
+                daysOfCare: $scope.user.family.daysOfCare,
+                hoursPerWeekCare: $scope.user.family.hoursPerWeekCare,
+                preferGender: $scope.user.family.preferGender,
+                preferCareType: $scope.user.family.preferCareType
+              }
             };
+
             $http
               .post('/api/family/' + $scope.user._id, updatedCareGiver)
               .then(function(response) {
-                $scope.jobSubmitted = true;
-                $timeout(function() {
-                  $scope.jobSubmitted = false;
-                  $scope.user = response.data;
-                  $location.path('/profile');
-                  $scope.$apply();
-                }, 300);
+                  if(response) {
+                    $scope.user = response.data;
+                    $location.path('/profile');
+                    $scope.jobSubmitted = true;
+                  }
+          
               });
           }
 
           $scope.editJob = function() {
+            $scope.jobSubmitted = true;
+            
             var updatedCareGiver = {
-              patient: $scope.user.patient,
-              contactOfPatient: $scope.user.contactOfPatient,
-              locationOfPatient: $scope.user.locationOfPatient,
-              dailyActivities: $scope.user.dailyActivities,
-              startDate: $scope.user.startDate,
-              timesOfDayCare: $scope.user.timesOfDayCare,
-              daysOfCare: $scope.user.daysOfCare,
-              hoursPerWeekCare: $scope.user.hoursPerWeekCare,
-              preferGender: $scope.user.preferGender,
-              preferCareType: $scope.user.preferCareType
+              family: {
+                active: $scope.user.family.active,
+                patient: $scope.user.family.patient,
+                contactOfPatient: $scope.user.family.contactOfPatient,
+                locationOfPatient: $scope.user.family.locationOfPatient,
+                dailyActivities: $scope.user.family.dailyActivities,
+                startDate: $scope.user.family.startDate,
+                timesOfDayCare: $scope.user.family.timesOfDayCare,
+                daysOfCare: $scope.user.family.daysOfCare,
+                hoursPerWeekCare: $scope.user.family.hoursPerWeekCare,
+                preferGender: $scope.user.family.preferGender,
+                preferCareType: $scope.user.family.preferCareType
+              }
             };
             $http
               .post('/api/family/' + $scope.user._id, updatedCareGiver)
               .then(function(response) {
-                $scope.jobSubmitted = true;
-                $timeout(function() {
-                  $scope.jobSubmitted = false;
+                if( response ) {
                   $scope.user = response.data;
                   $location.path('/profile');
-                  $scope.$apply();
-                }, 300);
+                  $scope.jobSubmitted = false;
+                  
+                }
               });
           }
         })
@@ -122,9 +129,11 @@
         }])
         .controller('MessageCareGiver', ['$scope','$stateParams','$location','$timeout','$http', function ($scope, $stateParams,$location, $timeout, $http) {
             $scope.messageSubmitted = false;
-            $scope.jobId = $stateParams.id;
+            $scope.careGiverId = $stateParams.id;
             
             $scope.sendMessage = function() {
+              $scope.messageSubmitted = true;
+              
               var message = {
                 fromId: $scope.$parent.user._id,
                 fromFName: $scope.$parent.user.fName,
@@ -132,16 +141,14 @@
                 to: $stateParams.id,
                 message: $scope.message
               };
-              console.log(message);
               $http
                 .post('/api/caregiver/message/' + $stateParams.id, message)
                 .then(function(response) {
-                    $scope.messageSubmitted = true;
-                    $timeout(function() {
-                      $scope.messageSubmitted = false;
-                      $location.path('/profile');
-                      $scope.$apply();
-                    }, 300);
+                  if( response ) {
+                    $scope.messageSubmitted = false;
+                    $location.path('/profile');
+                    
+                  }
                 });
               
             }

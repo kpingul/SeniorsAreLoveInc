@@ -1,0 +1,23 @@
+<div class="row cg-profile-row">
+	<h6>My Messages</h6>
+	<table class="table">
+<thead>
+  <tr>
+    <th>user</th>
+    <th>message</th>
+    <th>profile</th>
+    <th>contact</th>
+  </tr>
+</thead>
+<tbody>
+  <tr ng-repeat="message in user.family.patientMessages track by $index">
+    <td>{{message.fromFName}} {{message.fromLName}}</td>
+    <td>{{message.message}}</td>
+    <td><a ui-sref="caregiverProfile({id: message.fromId})">View </a></td>
+    <td><a ui-sref="messageCareGiver({id: message.fromId})">Reply </a></td>
+  </tr>
+  <tr>
+    
+</tbody>
+</table>
+</div>
