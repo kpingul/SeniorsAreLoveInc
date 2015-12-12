@@ -64,7 +64,11 @@
           <ul  class="list-inline" style="color: #FF6060">
             <li ><a ui-sref-active="active" ui-sref="careGiverProfile">Profile</a></li>
             <li ><a ui-sref-active="active" ui-sref="caregiverJobs">Browse Jobs</a></li>
-            <li ><a ui-sref-active="active" ui-sref="inbox">Messages<span class="messageAlert">{{user.cgMessages.length}}</span></a></li>
+            <li >
+              <a ui-sref-active="active" ui-sref="inbox">
+                Messages<!-- <span class="messageAlert">{{user.cgMessages.length}}</span> -->
+              </a>
+            </li>
             <li ><a ui-sref-active="active" ui-sref="careGiverProfileSettings">Settings</a></li>
           </ul>
         </div><!-- end of row -->
@@ -137,6 +141,9 @@
     
     <script src="/public/src/js/app/CGDashBoard/app.js"></script>
     <script src="/public/src/js/app/CGDashBoard/controller/CGDashBoardCtrl.js"></script>
+    <script src="/public/src/js/app/CGDashBoard/controller/MessageJobCtrl.js"></script>
+    <script src="/public/src/js/app/CGDashBoard/controller/CGJobProfileCtrl.js"></script>
+    <script src="/public/src/js/app/CGDashBoard/Models/API.service.js"></script>
 
     </body>
 </html>

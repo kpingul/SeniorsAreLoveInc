@@ -1,3 +1,7 @@
+//abstract away routes into file
+//abstract away services into file
+	//cloudinary
+
 'use strict';
 var UserModel = require('./models/Users'),
     cloudinary = require('cloudinary'),

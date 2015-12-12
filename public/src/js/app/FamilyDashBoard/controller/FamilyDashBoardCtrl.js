@@ -19,8 +19,8 @@
             $http
               .get('/api/caregivers/')
               .then(function(response) {
-                $scope.caregivers = response.data;
                 $scope.activeCg = _.where(response.data, {cgActive: true});
+                console.log($scope.activeCg);
               });
           }
 

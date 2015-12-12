@@ -6,7 +6,7 @@
 				<ul class="list-group">
 					<li class="list-group-item" ng-repeat='job in activeJobs track by $index'>
 						<a ui-sref="caregiverJob({id: job._id})" style="color:#555" >
-							<p style="color: #ADADAD"><strong>Job #{{job._id}}</strong> - 10/11/2015</p>
+							<p style="color: #ADADAD"><strong>Job #{{job._id}}</strong> - {{job.createdOn}}</p>
 							<h6>{{job.family.locationOfPatient}}, CA</h6>
 							<h6>{{job.family.hoursPerWeekCare}}hrs/Week</h6>
 							<a ui-sref="caregiverJob({id: job._id})">View</a>

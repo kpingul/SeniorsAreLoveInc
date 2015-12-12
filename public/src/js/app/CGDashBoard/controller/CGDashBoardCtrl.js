@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 	 angular.module('CGDashBoard')
-     .controller('CGDashBoardCtrl', ['$scope', '$http', '$timeout', '$location', function($scope, $http, $timeout, $location) {
+     .controller('CGDashBoardCtrl', ['$scope', '$location','APIService', function($scope, $location, APIService) {
         //$scope.user reflects the data model
         //from the datbase and has two-way binding
         //with the templates within CGDashBaord
@@ -23,24 +23,18 @@
           data stringified from the server
         */
         $scope.init = function(stringifiedArray) {
-          //Parsing the users data from the server 
-          var info = JSON.parse(stringifiedArray);
-
           //API call to get the authenticated
           //users information 
-          $http
-            .get('/api/caregiver/' + info)
+          APIService
+            .getCareGiver(JSON.parse(stringifiedArray))
             .then(function(response) {
-              $scope.user = response.data;
+              $scope.user = response;
 
             });
-          $http
-            .get('/api/caregiverJobs')
+          APIService
+            .getCareGiverJobs()
             .then(function(response) {
-              $scope.activeJobs = _.filter(response.data, function(job, index) {
-                return job.family.active == true;
-              });
-              console.log($scope.activeJobs);
+              $scope.activeJobs = response;
             });
         }
 
@@ -54,18 +48,9 @@
           //stores the users update 
           //information to an object
           //to query to the API
-          var updatedCareGiver = {
-            cgActive: $scope.user.cgActive,
-            gender: gender,
-            contact: {
-              address: $scope.user.contact.address,
-              city: $scope.user.contact.city,
-              zipCode: $scope.user.contact.zipCode
-            }
-
-          };
-          $http
-            .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
+      
+          APIService
+            .updateInformation($scope.user._id, $scope.user.cgActive, gender, $scope.user.contact.address, $scope.user.contact.city, $scope.user.contact.zipCode)
             .then(function(response) {
               if( response ) {
                 $scope.informationSubmitted = false;
@@ -76,16 +61,19 @@
         };
 
         $scope.updateAbout = function() {
-          $scope.aboutSubmitted = false;
+          $scope.aboutSubmitted = true;
           var updatedCareGiver = {
             about: $scope.user.about
           };
-          $http
-            .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
+          APIService
+            .updateCareGiver($scope.user._id, updatedCareGiver)
             .then(function(response) {
-              $scope.aboutSubmitted = true;
+              if( response ) {
+                $scope.aboutSubmitted = false;
                 $scope.user = response.data;
                 $location.path('/profile');
+                
+              }
             });
         };
 
@@ -100,8 +88,8 @@
             desc: $scope.user.profExp.desc
           };
 
-          $http
-            .post('/api/caregiver/experience/' + $scope.user._id, updatedCareGiver)
+          APIService
+            .updateCareGiver($scope.user._id, updatedCareGiver)
             .then(function(response) {
               if( response ) {
                 $scope.expSubmitted = false;
@@ -117,8 +105,8 @@
             yrsExp: $scope.user.yrsExp,
             workExp: $scope.user.workExp
           };
-          $http
-            .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
+          APIService
+            .updateCareGiver($scope.user._id, updatedCareGiver)
             .then(function(response) {
               if( response ) {
                 $scope.expSubmitted = false;
@@ -138,8 +126,8 @@
             phone: $scope.user.phone
             
           };
-          $http
-            .post('/api/caregiver/' + $scope.user._id, updatedCareGiver)
+          APIService
+            .updateCareGiver($scope.user._id, updatedCareGiver)
             .then(function(response) {
               if( response ) {
                 $scope.accountSubmitted = false;
@@ -158,8 +146,8 @@
             skills: $scope.user.skills
           };
 
-          $http
-            .post('/api/caregiver/services/' + $scope.user._id, updatedCareGiver)
+          APIService
+            .updateCareGiverServices($scope.user._id, updatedCareGiver)
             .then(function(response) {
               if( response ) {
                 $scope.skillsExpSubmitted = false;
@@ -196,39 +184,8 @@
         }
 
     }])
-    .controller('CaregiverJobProfile', ['$scope','$http', '$stateParams', function ($scope, $http, $stateParams) {
 
-        $http
-          .get('/api/family/' + $stateParams.id)
-          .then(function(response) {
-            $scope.caregiverJob = response.data;
-          });
-    }])
-    .controller('MessageJob', ['$scope','$http','$stateParams', '$timeout','$location', function ($scope,$http, $stateParams,$timeout, $location) {
-      $scope.messageSubmitted = false;
-      $scope.jobId = $stateParams.id;
-      
-      $scope.sendMessage = function() {
-        $scope.messageSubmitted = true;
-        
-        var message = {
-          fromId: $scope.$parent.user._id,
-          fromFName: $scope.$parent.user.fName,
-          fromLName: $scope.$parent.user.lName,
-          to: $stateParams.id,
-          message: $scope.message
-        };
-        $http
-          .post('/api/caregiverjob/message/' + $stateParams.id, message)
-          .then(function(response) {
-            if( response ) {
-              $scope.messageSubmitted = false;
-              $location.path('/profile');
-            }
-          });
-        
-      }
-    }])
+ 
       
 	
 }());

@@ -15,6 +15,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'bower_components/angular/angular.min.js',
+        'bower_components/angular-file-model/angular-file-model.js',
+        'bower_components/angular-ui-router/release/angular-ui-router.js',
+        'bower_components/angular-mocks/angular-mocks.js',
+        'bower_components/jquery/dist/jquery.js',
+        'public/src/js/app/CGDashBoard/app.js',
+        'public/src/js/app/CGDashBoard/**/*.js',
+        // 'public/src/js/app/FamilyDashBoard/**/*.js',
+        'public/tests/test.js'
     ],
 
 

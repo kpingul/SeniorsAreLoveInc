@@ -10,7 +10,10 @@ color: #123149;
 .mainColor{
 	color: #FF6060;
 }
+p {
+    word-wrap: break-word;
 
+}
 html {
 	position: relative;
 	min-height: 100%;

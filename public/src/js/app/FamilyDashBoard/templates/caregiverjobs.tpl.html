@@ -2,10 +2,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<h2 style="text-transform: none">{{activeCg.length}} Caregivers near San Francisco, CA</h2>
-				
-				<ul class="list-group">
-					<li class="list-group-item" ng-repeat='caregiver in caregivers track by $index' ng-if="caregiver.cgActive">
-							<div class="media" style="    background: #F1F1F1;padding: 30px" >
+		
+							<div class="media" style="    background: #F1F1F1;padding: 30px" ng-repeat='caregiver in activeCg track by $index'>
 								  <div class="media-left">
 								    <a ui-sref="caregiverProfile({id: caregiver._id})">
 								    	<img ng-src="/public/build/img/userlogo.png" ng-if="!caregiver.cgImageUrl" width="230" height="230" class="media-object img-circle" alt="">
@@ -14,22 +12,22 @@
 								  </div>
 								  <div class="media-body">
 								  	<a ui-sref="caregiverProfile({id: caregiver._id})" style="color: #555">
-									    <h4 class="media-heading" style="color: #FF6060">{{caregiver.fName}} {{caregiver.lName[0]}}. <small class="right cg-jobs-view">{{caregiver.contact.city}}</small></h4>
-											<p>{{caregiver.about.slice(0, caregiver.about.length/3)}}...</p>
-											<p><span class="label label-danger">{{caregiver.yrsExp}}+ Exp</span></p>
-											<span class="label label-danger" style="margin-right: 5px" ng-repeat="skill in caregiver.skills">
-												{{skill}}
-											</span>
+									    <h4 class="media-heading mainColor">{{caregiver.fName}} {{caregiver.lName[0]}}. 
+									    	<small class="right cg-jobs-view mainColor" >{{caregiver.contact.city}}</small>
+
+									    </h4>
 								  	</a>
+								  		<h4>${{caregiver.hourRate}} Per Hour</h4>
+								  		<h4>{{caregiver.yrsExp}}+ Exp</h4>
+											<p>{{caregiver.about.slice(0, caregiver.about.length/3)}}...</p>
+											<div class="label label-danger" style="margin-right: 5px; display: inline-block" ng-repeat="skill in caregiver.skills track by $index">
+												
+												{{skill}}
+											</div>
 								  </div>
-								  <div class="media-right">
-								  	 <h4>${{caregiver.hourRate}}/<small>Hour</small></h4>
-								  </div>
+								  
 							</div>
-					</li>
-				</ul>
-
-
+		
 		</div>
 	</div>
 
