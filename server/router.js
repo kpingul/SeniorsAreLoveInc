@@ -9,7 +9,7 @@ module.exports = function(app, config) {
 
 	/* ___________________________*/
 	/* 				Main  Routes 				*/
-	/* ___________________________*/
+	/* __________________________*/
 
 	app.use('/', require('./routes/main').index);
 	app.use('/login', require('./routes/main').login);
@@ -25,34 +25,8 @@ module.exports = function(app, config) {
 	/* 			Public  API     */
 	/* _____________________*/
 
-	app.get('/api/caregivers', function(req, res) {
-		UserModel.find({}, function(err, users) {
-			var careGivers = [];
-			if(err)
-				res.sendStatus(err)
-			users.forEach(function(user, index) {
-				if(user.position == 'caregiver')
-					careGivers.push(user);
-			});
-			res.send(careGivers);
-			
-		});
-	});		
-
-	app.get('/api/caregiverJobs', function(req, res) {
-		UserModel.find({}, function(err, users) {
-			var family = [];
-			if(err)
-				res.sendStatus(err)
-			users.forEach(function(user, index) {
-				if(user.position == 'family')
-					family.push(user);
-			});
-			res.send(family);
-			
-		});
-	});	
-
+	app.use('/api', require('./routes/api').getCareGivers);
+	app.use('/api', require('./routes/api').getCareGiverJobs);
 
 	/*
 		A message sent to the family of the job position from
