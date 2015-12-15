@@ -1,7 +1,3 @@
-//abstract away routes into file
-//abstract away services into file
-	//cloudinary
-
 'use strict';
 var UserModel = require('./models/Users'),
     cloudinary = require('cloudinary'),
@@ -11,55 +7,22 @@ var UserModel = require('./models/Users'),
 
 module.exports = function(app, config) {
 
-	/* _____________________*/
-	/* Global Configuration Routes */
-	/* _____________________*/
+	/* ___________________________*/
+	/* 				Main  Routes 				*/
+	/* ___________________________*/
+
 	app.use('/', require('./routes/main').index);
 	app.use('/login', require('./routes/main').login);
 	app.use('/loginUser', require('./routes/main').loginUser);
-
-	app.get('/logout', function(req, res){
-  	req.logout();
-  	res.redirect('/');
-	});
-	app.get('/signup', function(req, res) {
-		res.render('signup');
-	});
-
-	cloudinary.config({ 
-  	cloud_name: 'seniorsreloveinc', 
-  	api_key: '869915418475518', 
-  	api_secret: 'KA9ffHIuCK1gXN-c0UZzWRwfTpI' 
-	});
-
-
-	app.post('/api/images', upload.single('photo'), function (req, res) {
-	 
-	  cloudinary.uploader.upload(req.file.path, function(result) { 
-	 	 if(result) {
-	 	 	UserModel.findOne({_id: req.user._id}, function(err, user) {
-	 	 		if(err) {
-	 	 			res.sendStatus(err);
-	 	 		}
-	 	 		user.cgImageUrl = result.url;
-	 	 		user.save(function(err) {
-	 	 			if(err)
-	 	 				console.log(err);
-	 	 			res.redirect('/caregiver/dashboard/')
-	 	 		});
-	 	 	});
-	 	 } 
-		}, {angle: 'exif'});
-
-	 });
-
-
-
-
-
+	app.use('/logoutUser', require('./routes/main').logoutUser);
+	app.use('/signup', require('./routes/main').signUp);
+	app.use('/uploadImages', require('./routes/main').uploadImages);
+	app.use('/register/family', require('./routes/main').registerFamily);
+	app.use('/register/caregiver', require('./routes/main').registerCareGiver);
+	
 
 	/* _____________________*/
-	/* Public  API          */
+	/* 			Public  API     */
 	/* _____________________*/
 
 	app.get('/api/caregivers', function(req, res) {
@@ -141,9 +104,7 @@ module.exports = function(app, config) {
 	/* Register  as Family */
 	/* _____________________*/
 
-	app.get('/register/family', function(req, res) {
-		res.render('registerFamily', { message: req.flash('register') });
-	});
+
 
 	app.post('/register/family', function(req, res) {
 
@@ -213,9 +174,7 @@ module.exports = function(app, config) {
 	/* Register  as Caregiver */
 	/* _____________________*/
 
-	app.get('/register/caregiver', function(req, res) {
-		res.render('registerCaregiver',  { message: req.flash('register') });
-	});
+
 
 	app.post('/register/caregiver', function(req, res) {
 

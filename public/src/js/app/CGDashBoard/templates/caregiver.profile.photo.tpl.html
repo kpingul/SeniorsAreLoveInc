@@ -2,7 +2,7 @@
 	<h4 >Profile Photo</h4>
 	<p>Click Choose File to select a photo from your computer or mobile device and then Click Upload to add your photo.</p>
 
-	<form method="post" action="/api/images" enctype="multipart/form-data">
+	<form method="post" action="/upload/images" enctype="multipart/form-data">
     <div class="form-group">
 
 				<img id="ads_img_src" width="230"  class="img-circle" preview-image data="ads_image ads_img_src" ng-src="{{user.cgImageUrl ? user.cgImageUrl : '/public/build/img/userlogo.png'}}"/>
