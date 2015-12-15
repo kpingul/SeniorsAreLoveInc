@@ -14,12 +14,10 @@ module.exports = function(app, config) {
 	/* _____________________*/
 	/* Global Configuration Routes */
 	/* _____________________*/
-	app.get('/', function(req, res){
-  	res.render('index');
-	});
-	app.get('/login', function(req, res){
-	  res.render('login', { message: req.flash('loginMessage') });
-	});
+	app.use('/', require('./routes/main').index);
+	app.use('/login', require('./routes/main').login);
+	app.use('/loginUser', require('./routes/main').loginUser);
+
 	app.get('/logout', function(req, res){
   	req.logout();
   	res.redirect('/');
@@ -56,21 +54,6 @@ module.exports = function(app, config) {
 	 });
 
 
-	/* _____________________*/
-	/* Auth Strategy routes  */
-	/* _____________________*/
-
-
-	app.post('/login', 
-	  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
-	  	function(req, res) {
-	  		if( req.user.position == 'caregiver' ) {
-	  			res.redirect('/caregiver/dashboard/');
-	  		} else if ( req.user.position == 'family' ) {
-	  			res.redirect('/family/dashboard/');
-	  		}	  			
-	  		
-	  	});
 
 
 
