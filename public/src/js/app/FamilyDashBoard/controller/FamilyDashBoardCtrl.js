@@ -9,9 +9,11 @@
 
           $scope.init = function(stringifiedArray) {
             var info = JSON.parse(stringifiedArray);
+            console.log(info)
             $http
               .get('/api/family/' + info)
               .then(function(response) {
+                console.log(response);
                 $scope.user = response.data;
                 $scope.family = response.data;
                 

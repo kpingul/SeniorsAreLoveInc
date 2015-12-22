@@ -29,6 +29,7 @@ module.exports = (function() {
 
 	routerService.loginUser = router.post('/login', passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
   	function(req, res) {
+
   		if( req.user.position == 'caregiver' ) {
   			res.redirect('/caregiver/dashboard/');
   		} else if ( req.user.position == 'family' ) {

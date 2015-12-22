@@ -1,6 +1,7 @@
 'use strict';
 var UserModel = require('./models/Users'),
-    cloudinary = require('cloudinary'),
+		CareGiverModel = require('./models/CareGiver'),
+    FamilyModel = require('./models/Family'),
     multer     = require('multer'),
     upload 		 = multer({dest: './uploads/'}),
 		passport = require('passport');
@@ -33,8 +34,7 @@ module.exports = function(app, config) {
 		a caregiver
 	*/
 	app.post('/api/caregiverjob/message/:id', function(req, res) {
-		console.log(req.body);
-		UserModel.findById({_id: req.params.id}, function(err, user) {
+		FamilyModel.findById({_id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			console.log(user);
@@ -54,11 +54,9 @@ module.exports = function(app, config) {
 	});	
 
 	app.post('/api/caregiver/message/:id', function(req, res) {
-		console.log(req.body);
-		UserModel.findById({_id: req.params.id}, function(err, user) {
+		CareGiverModel.findById({_id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
-			console.log(user);
 			user.cgMessages.push({
 				fromId: req.body.fromId,
 				fromFName: req.body.fromFName,
@@ -82,7 +80,7 @@ module.exports = function(app, config) {
 
 	app.post('/register/family', function(req, res) {
 
-			UserModel.findOne({email: req.body.email}, function(err, user) {
+			FamilyModel.findOne({email: req.body.email}, function(err, user) {
 				if(err) {
 					res.sendStatus(err);
 				}
@@ -91,7 +89,7 @@ module.exports = function(app, config) {
 					res.redirect('/register/family');
 				} 
 				if(!user) {
-					var newFamily = new UserModel({
+					var newFamily = new FamilyModel({
 						position: 'family',
 						email: req.body.email,
 						fName: req.body.fName,
@@ -128,7 +126,7 @@ module.exports = function(app, config) {
 	});
 
 		app.get('/api/family/:id', ensureAuthenticated, function(req, res) {
-		UserModel.findOne({_id: req.params.id}, function(err, user) {
+		FamilyModel.findOne({_id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			res.send(user);
@@ -136,7 +134,7 @@ module.exports = function(app, config) {
 	});
 
 	app.post('/api/family/:id', ensureAuthenticated, function(req, res) {
-		UserModel.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user) {
+		FamilyModel.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			res.send(user);
@@ -152,7 +150,7 @@ module.exports = function(app, config) {
 
 	app.post('/register/caregiver', function(req, res) {
 
-		UserModel.findOne({email: req.body.email}, function(err, user) {
+		CareGiverModel.findOne({email: req.body.email}, function(err, user) {
 			if(err) {
 				res.sendStatus(err);
 			}
@@ -161,7 +159,7 @@ module.exports = function(app, config) {
 				res.redirect('/register/caregiver');
 			} 
 			if(!user) {
-				var newCareGiver = new UserModel({
+				var newCareGiver = new CareGiverModel({
 					position: 'caregiver',
 					email: req.body.email,
 					fName: req.body.fName,
@@ -200,7 +198,7 @@ module.exports = function(app, config) {
 
 
 	app.get('/api/caregiver/:id', ensureAuthenticated, function(req, res) {
-		UserModel.findOne({_id: req.params.id}, function(err, user) {
+		CareGiverModel.findOne({_id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			res.send(user);
@@ -208,7 +206,7 @@ module.exports = function(app, config) {
 	});
 
 	app.post('/api/caregiver/:id', ensureAuthenticated, function(req, res) {
-		UserModel.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user) {
+		CareGiverModel.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			res.send(user);
@@ -216,7 +214,7 @@ module.exports = function(app, config) {
 	});	
 	app.post('/api/caregiver/experience/:id', ensureAuthenticated, function(req, res) {
 
-		UserModel.findById({ _id: req.params.id}, function(err, user) {
+		CareGiverModel.findById({ _id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 
@@ -238,7 +236,7 @@ module.exports = function(app, config) {
 	});
 	app.post('/api/caregiver/services/:id', ensureAuthenticated, function(req, res) {
 
-		UserModel.findById({_id: req.params.id}, function(err, user) {
+		CareGiverModel.findById({_id: req.params.id}, function(err, user) {
 			if(err)
 				res.sendStatus(err);
 			user.hourRate = req.body.hourRate;
