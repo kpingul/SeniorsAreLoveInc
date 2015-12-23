@@ -67,17 +67,5 @@ CareGiverModel.methods.validPassword = function(password) {
 };
 
 
-// var Schema = mongoose.Schema;
-
-// var TodoModel = new Schema({
-//   title: {
-//     type: String
-//   },
-//   creator: {
-//     type: Schema.ObjectId,
-//     ref: 'User'
-//   }
-// });
-// var Todos = mongoose.model('todos', TodoModel);
 
 module.exports = mongoose.model('CareGivers', CareGiverModel);

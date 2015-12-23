@@ -4,7 +4,7 @@ var CareGiverModel 	= require('./models/CareGiver'),
     MessageModel 		= require('./models/Message'),
     multer     			= require('multer'),
     upload 		 			= multer({dest: './uploads/'}),
-		passport 				= require('passport');
+		passport 		 		= require('passport');
 
 module.exports = function(app, config) {
 
