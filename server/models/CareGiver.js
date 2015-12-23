@@ -1,7 +1,7 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt   = require('bcrypt-nodejs');
+var mongoose  = require('mongoose');
+var Schema    = mongoose.Schema;
+var bcrypt    = require('bcrypt-nodejs');
 
 //CG is for caregivers who are applying
 var CareGiverModel = new Schema({
@@ -32,16 +32,6 @@ var CareGiverModel = new Schema({
     default: false
   },
   cgImageUrl: String,
-  cgMessages: [{
-    createdOn: {
-      type: Date,
-      default: Date.now
-    },
-    fromId: String,
-    fromFName: String,
-    fromLName: String,
-    message: String
-  }],
   hourRate: String,
   careType: String,
   skills: [{

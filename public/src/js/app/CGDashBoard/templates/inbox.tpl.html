@@ -10,11 +10,11 @@
   </tr>
 </thead>
 <tbody>
-  <tr ng-repeat="message in user.cgMessages track by $index">
-    <td>{{message.fromFName}} {{message.fromLName}}</td>
+  <tr ng-repeat="message in messages track by $index">
+    <td>{{message.fName}} {{message.lName}}</td>
     <td>{{message.message}}</td>
-    <td><a ui-sref="caregiverJob({id: message.fromId})">View </a></td>
-    <td><a ui-sref="messageJob({id: message.fromId})">Reply </a></td>
+    <td><a ui-sref="caregiverJob({id: message.from})">View </a></td>
+    <td><a ui-sref="messageJob({id: message.from})">Reply </a></td>
   </tr>
   <tr>
     

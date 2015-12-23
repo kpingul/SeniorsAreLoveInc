@@ -1,10 +1,10 @@
 'use strict';
-var UserModel = require('./models/Users'),
-		CareGiverModel = require('./models/CareGiver'),
-    FamilyModel = require('./models/Family'),
-    multer     = require('multer'),
-    upload 		 = multer({dest: './uploads/'}),
-		passport = require('passport');
+var CareGiverModel 	= require('./models/CareGiver'),
+    FamilyModel 		= require('./models/Family'),
+    MessageModel 		= require('./models/Message'),
+    multer     			= require('multer'),
+    upload 		 			= multer({dest: './uploads/'}),
+		passport 				= require('passport');
 
 module.exports = function(app, config) {
 
@@ -33,45 +33,31 @@ module.exports = function(app, config) {
 		A message sent to the family of the job position from
 		a caregiver
 	*/
-	app.post('/api/caregiverjob/message/:id', function(req, res) {
-		FamilyModel.findById({_id: req.params.id}, function(err, user) {
-			if(err)
-				res.sendStatus(err);
-			console.log(user);
-			user.family.patientMessages.push({
-				fromId: req.body.fromId,
-				fromFName: req.body.fromFName,
-				fromLName: req.body.fromLName,
-				message: req.body.message
-			});
 
-			user.save(function(err) {
+	app.get('/api/messages', function(req, res) {
+		MessageModel
+			.find({recipient: req.user.id})
+			.exec(function(err, messages) {
 				if(err)
 					console.log(err);
-				res.send(user);
-			});
+				res.send(messages);
+			})
+	});
+	app.post('/api/messages', function(req, res) {
+		var newMessage = new MessageModel({
+			from: req.user.id,
+			fName: req.user.fName,
+			lName: req.user.lName,
+			recipient: req.body.recipientId,
+			message: req.body.message	
+		});
+	
+		newMessage.save(function(err) {
+			if(err)
+				console.log(err);
+			res.send({success: true});
 		});
 	});	
-
-	app.post('/api/caregiver/message/:id', function(req, res) {
-		CareGiverModel.findById({_id: req.params.id}, function(err, user) {
-			if(err)
-				res.sendStatus(err);
-			user.cgMessages.push({
-				fromId: req.body.fromId,
-				fromFName: req.body.fromFName,
-				fromLName: req.body.fromLName,
-				message: req.body.message
-			});
-
-			user.save(function(err) {
-				if(err)
-					console.log(err);
-				res.send(user);
-			});
-		});
-	});
-
 	/* _____________________*/
 	/* Register  as Family */
 	/* _____________________*/

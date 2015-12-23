@@ -8,8 +8,8 @@
 						getJobProfile: getJobProfile,
 						updateCareGiver: updateCareGiver,
 						updateInformation: updateInformation,
-
 						updateCareGiverServices: updateCareGiverServices,
+						getMessages: getMessages,
 						sendMessageToJob: sendMessageToJob
 					};
 				
@@ -87,13 +87,22 @@
 							})
 							.catch(handleError);
 					}
-					function sendMessageToJob(idOfJobProfile, message) {
+					function getMessages() {
 						return $http
-							.post('/api/caregiverjob/message/' + idOfJobProfile, message)
+							.get('/api/messages')
 							.then(function(response) {
 								return response.data;
 							})
 							.catch(handleError);
+
+					}
+					function sendMessageToJob(idOfJobProfile, message) {
+						return $http
+							.post('/api/messages', message)
+							.then(function(response) {
+								return response.data;
+							})
+							.catch(handleError);	
 					}
 					function handleError(error) {
 						console.log(error);

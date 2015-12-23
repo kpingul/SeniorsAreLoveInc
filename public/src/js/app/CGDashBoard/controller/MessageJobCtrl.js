@@ -9,10 +9,7 @@
 	        $scope.messageSubmitted = true;
 	        
 	        var message = {
-	          fromId: $scope.$parent.user._id,
-	          fromFName: $scope.$parent.user.fName,
-	          fromLName: $scope.$parent.user.lName,
-	          to: $stateParams.id,
+	          recipientId: $stateParams.id,
 	          message: $scope.message
 	        };
 	        APIService

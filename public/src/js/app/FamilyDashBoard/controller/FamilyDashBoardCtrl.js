@@ -9,20 +9,25 @@
 
           $scope.init = function(stringifiedArray) {
             var info = JSON.parse(stringifiedArray);
-            console.log(info)
             $http
               .get('/api/family/' + info)
               .then(function(response) {
-                console.log(response);
                 $scope.user = response.data;
                 $scope.family = response.data;
                 
               });
             $http
+            .get('/api/messages')
+            .then(function(response) {
+              $scope.messages = response.data;
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+            $http
               .get('/api/caregivers/')
               .then(function(response) {
                 $scope.activeCg = _.where(response.data, {cgActive: true});
-                console.log($scope.activeCg);
               });
           }
 
@@ -137,14 +142,11 @@
               $scope.messageSubmitted = true;
               
               var message = {
-                fromId: $scope.$parent.user._id,
-                fromFName: $scope.$parent.user.fName,
-                fromLName: $scope.$parent.user.lName,
-                to: $stateParams.id,
+                recipientId: $stateParams.id,
                 message: $scope.message
               };
               $http
-                .post('/api/caregiver/message/' + $stateParams.id, message)
+                .post('/api/messages', message)
                 .then(function(response) {
                   if( response ) {
                     $scope.messageSubmitted = false;

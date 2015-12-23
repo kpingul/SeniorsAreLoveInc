@@ -1,21 +1,15 @@
 var express   = require('express'),
-    passport  = require('passport'),
-    util      = require('util'),
-    cloudinary = require('cloudinary'),
-    session   = require('express-session'),
-    UserModel = require('./server/models/Users'),
-    mongoose  = require('mongoose'),
     config    = require('./server/config'),
     app       = express();
 
-cloudinary.config({ 
-  cloud_name: config.development.cloudinary.cloud_name, 
-  api_key: config.development.cloudinary.api_key, 
- 	api_secret: config.development.cloudinary.api_secret 
-});
-
-mongoose.connect(config.development.db.url);
+//Connect to cloudinary services
+require('./server/cloudinary')(config);
+//Connect to mongodb instance
+require('./server/mongoose')(config);
+//Connect all required express middleware
 require('./server/express')(app);
+//Connect all required authentication strategies
 require('./server/passport')();
+//Connect Routes
 require('./server/router')(app, config);
 

@@ -10,11 +10,11 @@
   </tr>
 </thead>
 <tbody>
-  <tr ng-repeat="message in user.family.patientMessages track by $index">
-    <td>{{message.fromFName}} {{message.fromLName}}</td>
+  <tr ng-repeat="message in messages track by $index">
+    <td>{{message.lName}}, {{message.fName}}</td>
     <td>{{message.message}}</td>
-    <td><a ui-sref="caregiverProfile({id: message.fromId})">View </a></td>
-    <td><a ui-sref="messageCareGiver({id: message.fromId})">Reply </a></td>
+    <td><a ui-sref="caregiverProfile({id: message.from})">View </a></td>
+    <td><a ui-sref="messageCareGiver({id: message.from})">Reply </a></td>
   </tr>
   <tr>
     

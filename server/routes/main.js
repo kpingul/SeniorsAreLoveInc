@@ -1,12 +1,11 @@
 'use strict';
 
-var express = require('express'),
-		config = require('./../config'),
-    cloudinary = require('./../models/Cloudinary'),
-    UserModel = require('./../models/Users'),
-    multer     = require('multer'),
-    upload 		 = multer({dest: './uploads/'}),
-		passport = require('passport');
+var express 		= require('express'),
+		config 			= require('./../config'),
+    cloudinary 	= require('./../models/Cloudinary'),
+    multer     	= require('multer'),
+    upload 		 	= multer({dest: './uploads/'}),
+		passport 		= require('passport');
 
 module.exports = (function() {
 	

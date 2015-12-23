@@ -32,6 +32,11 @@
 
             });
           APIService
+            .getMessages()
+            .then(function(response) {
+              $scope.messages = response;
+            });
+          APIService
             .getCareGiverJobs()
             .then(function(response) {
               $scope.activeJobs = response;

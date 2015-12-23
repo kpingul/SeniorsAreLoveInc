@@ -1,7 +1,7 @@
 'use strict';
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt   = require('bcrypt-nodejs');
+var mongoose  = require('mongoose');
+var Schema    = mongoose.Schema;
+var bcrypt    = require('bcrypt-nodejs');
 
 //CG is for caregivers who are applying
 var FamilyModel = new Schema({
@@ -33,16 +33,6 @@ var FamilyModel = new Schema({
       default: false
     },
     patient: String,
-    patientMessages:[{
-      createdOn: {
-        type: Date,
-        default: Date.now
-      },
-      fromId: String,
-      fromFName: String,
-      fromLName: String,
-      message: String
-    }],
     contactOfPatient: String,
     locationOfPatient: String,
     dailyActivities: [{
