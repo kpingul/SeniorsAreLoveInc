@@ -99,8 +99,8 @@ module.exports = function(app, config) {
 			        }
 							var email     = new sendgrid.Email({
 							  to:       newFamily.email,
-							  from:     'contact@seniorsareloveinc.co',
-							  subject:  'Thanks for joining the team at SeniorsAreLoveInc.com!'
+							  from:     utility.email,
+							  subject:  utility.subject
 							});
 							email.setHtml(utility.setHtml(newFamily.fName));
 							sendgrid.send(email, function(err, json) {
@@ -180,18 +180,18 @@ module.exports = function(app, config) {
 		          console.log(err);
 		        }
 		        var email     = new sendgrid.Email({
-							  to:       newCareGiver.email,
-							  from:     'contact@seniorsareloveinc.co',
-							  subject:  'Thanks for joining the team at SeniorsAreLoveInc.com!'
-							});
-							email.setHtml(utility.setHtml(newCareGiver.fName));
-							sendgrid.send(email, function(err, json) {
-							  if (err) { 
-							  	console.error(err); 
-							  }
-								console.log('successfully registered ' + newCareGiver.fName);
-			        	return res.redirect('/caregiver/dashboard/');
-							});
+						  to:       newCareGiver.email,
+						  from:     utility.email,
+						  subject:  utility.subject
+						});
+						email.setHtml(utility.setHtml(newCareGiver.fName));
+						sendgrid.send(email, function(err, json) {
+						  if (err) { 
+						  	console.error(err); 
+						  }
+							console.log('successfully registered ' + newCareGiver.fName);
+		        	return res.redirect('/caregiver/dashboard/');
+						});
 	      	});
 					
 				});
