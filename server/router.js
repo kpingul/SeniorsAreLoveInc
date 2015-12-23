@@ -3,6 +3,9 @@ var CareGiverModel 	= require('./models/CareGiver'),
     FamilyModel 		= require('./models/Family'),
     MessageModel 		= require('./models/Message'),
     multer     			= require('multer'),
+    utility         = require('./utility'),
+    config 					= require('./config'),
+    sendgrid    		= require('sendgrid')(config.development.sendGrid.api_key),
     upload 		 			= multer({dest: './uploads/'}),
 		passport 		 		= require('passport');
 
@@ -94,8 +97,20 @@ module.exports = function(app, config) {
 			        if (err) {
 			          console.log(err);
 			        }
-							console.log('successfully registered ' + newFamily.fName);
-			        return res.redirect('/family/dashboard/');
+							var email     = new sendgrid.Email({
+							  to:       newFamily.email,
+							  from:     'contact@seniorsareloveinc.co',
+							  subject:  'Thanks for joining the team at SeniorsAreLoveInc.com!'
+							});
+							email.setHtml(utility.setHtml(newFamily.fName));
+							sendgrid.send(email, function(err, json) {
+							  if (err) { 
+							  	console.error(err); 
+							  }
+								console.log('successfully registered ' + newFamily.fName);
+			        	return res.redirect('/family/dashboard/');
+							});
+
 		      	});
 						
 					});
@@ -164,8 +179,19 @@ module.exports = function(app, config) {
 		        if (err) {
 		          console.log(err);
 		        }
-						console.log('successfully registered ' + newCareGiver.fName);
-		        return res.redirect('/caregiver/dashboard/');
+		        var email     = new sendgrid.Email({
+							  to:       newCareGiver.email,
+							  from:     'contact@seniorsareloveinc.co',
+							  subject:  'Thanks for joining the team at SeniorsAreLoveInc.com!'
+							});
+							email.setHtml(utility.setHtml(newCareGiver.fName));
+							sendgrid.send(email, function(err, json) {
+							  if (err) { 
+							  	console.error(err); 
+							  }
+								console.log('successfully registered ' + newCareGiver.fName);
+			        	return res.redirect('/caregiver/dashboard/');
+							});
 	      	});
 					
 				});

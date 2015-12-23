@@ -11,6 +11,9 @@ module.exports = (function() {
 				cloud_name: 'seniorsreloveinc',
 				api_key: '869915418475518',
 				api_secret: 'KA9ffHIuCK1gXN-c0UZzWRwfTpI'
+			},
+			sendGrid: {
+				api_key: 'SG.5EfnLxxISg6LS8djVlClbw.RNc2gjrUFr2l6mFzjTlg3eBG3rELUvJBSCmtEfJwrFU'
 			}
 		}
 	};

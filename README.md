@@ -11,6 +11,7 @@ Date: 12/7/15
 
 ####System Requirements
 - Login system with authentication/authorization
+- Email Notifcations when registered to services
 - Security validation done on server side
 - Virtual Cloud Server located near Bay Area
 
@@ -39,6 +40,7 @@ Cloud Services
 - MongoDB (Document based) Store users using MongoLab (PAAS)
 - Amazon Web Services EC2 ( Virtual Cloud server)
 - Cloudinary  ( Store images / manipulation )
+- SendGrid ( SMTP Email Cloud Services )
 
 ####Design 
 Application Architecture ( https://wireframe.cc/0ba0sQ )

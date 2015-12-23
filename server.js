@@ -1,6 +1,7 @@
-var express   = require('express'),
-    config    = require('./server/config'),
-    app       = express();
+var express     = require('express'),
+    config      = require('./server/config'),
+    app         = express();
+
 
 //Connect to cloudinary services
 require('./server/cloudinary')(config);
