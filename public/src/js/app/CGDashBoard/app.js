@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
-      angular.module('CGDashBoard', ['ui.router',  'file-model'])
-        .run(['$rootScope', '$templateCache', function ($rootScope, $templateCache) {
+      angular.module('CGDashBoard', ['templates', 'ui.router', 'file-model'])
+        .run(['$rootScope', function ($rootScope) {
           $rootScope.$on('$stateChangeSuccess',function(){
             $("html, body").animate({ scrollTop: 0 }, 0);
           });
@@ -12,19 +12,10 @@
             $(".loading").css('display', 'none');
           });
 
-          // $templateCache.put('caregiver.profile.about.tpl.html');
-          // $templateCache.put('caregiver.profile.experience.tpl.html');
-          // $templateCache.put('caregiver.profile.information.tpl.html');
-          // $templateCache.put('caregiver.profile.photo.tpl.html');
-          // $templateCache.put('caregiver.profile.services.tpl.html');
-          // $templateCache.put('caregiver.profile.settings.tpl.html');
-          // $templateCache.put('caregiver.profile.tpl.html');
-          // $templateCache.put('caregiverJobProfile.tpl.html');
-          // $templateCache.put('caregiverJobs.tpl.html');
-          // $templateCache.put('inbox.tpl.html');
-          // $templateCache.put('messageJob.tpl.html');
+       
         }])
         .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+
             $urlRouterProvider.when('', '/profile')
 
             $stateProvider

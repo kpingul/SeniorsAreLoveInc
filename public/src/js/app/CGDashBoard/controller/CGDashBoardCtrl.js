@@ -5,7 +5,6 @@
         //$scope.user reflects the data model
         //from the datbase and has two-way binding
         //with the templates within CGDashBaord
-
         $scope.workExp2 = false;
         
         //varibles that allow for the loading
