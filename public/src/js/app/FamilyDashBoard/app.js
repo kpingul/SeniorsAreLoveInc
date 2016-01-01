@@ -6,6 +6,13 @@
         $rootScope.$on('$stateChangeSuccess',function(){
           $("html, body").animate({ scrollTop: 0 }, 0);
         });
+        $rootScope.$on('$stateChangeStart', function() {
+          $(".loading").css('display', 'block');
+        });
+        $rootScope.$on('$stateChangeSuccess', function() {
+          $(".loading").css('display', 'none');
+        });
+
       }])
       .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
         $urlRouterProvider.when('', '/profile');

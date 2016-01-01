@@ -38,8 +38,7 @@ Cloud Services
 - Amazon Web Services EC2 ( Virtual Cloud server)
 - Cloudinary  ( Store images / manipulation )
 - MongoDB (Document based) Store users using MongoLab (PAAS)
-- Amazon Web Services EC2 ( Virtual Cloud server)
-- Cloudinary  ( Store images / manipulation )
+- CloudFront ( Caching static content such as CSS/JS/Images )
 - SendGrid ( SMTP Email Cloud Services )
 
 ####Design 

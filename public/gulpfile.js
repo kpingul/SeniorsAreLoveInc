@@ -4,6 +4,7 @@ var gulp 		= require('gulp'),
 	concat 		= require('gulp-concat'),
 	rename 		= require('gulp-rename'),
 	uglify 		= require('gulp-uglify'),
+	templateCache = require('gulp-angular-templatecache'),
 	minifyCss   = require('gulp-minify-css');
 
 /* Resuable path configuration */
@@ -28,16 +29,16 @@ var paths = {
 
 //Javascript scripts
 
-gulp.task('scripts', function(){
+gulp.task('CGDashBoardScripts', function(){
 
 	return gulp.src([
 
-				'src/js/app/app.js',
-				'src/js/app/CGDashBoard/controller/*.js'
+				'src/js/app/CGDashBoard/app.js',
+				'src/js/app/CGDashBoard/**/*.js'
 			 ])
-			.pipe(concat('app.min.js'))
+			.pipe(concat('CGDashBoardApp.min.js'))
 			.pipe(uglify())
-			.pipe(gulp.dest('build/js'));
+			.pipe(gulp.dest('build/js/CGDashBoard'));
 });
 
 
@@ -63,7 +64,7 @@ gulp.task('styles', function(){
 //Javascript files
 gulp.task('watchScripts', function(){
 
-	return gulp.watch('src/js/app/**/*.js', ['scripts']);
+	return gulp.watch('src/js/app/CGDashBoard/**/*.js', ['CGDashBoardScripts']);
 
 })
 
@@ -75,6 +76,18 @@ gulp.task('watchStyles', function(){
 
 });
 
+
+
+gulp.task('cacheCGDashBoard', function () {
+  return gulp.src('src/js/app/CGDashBoard/templates/**/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('src/js/app/CGDashBoard'));
+});
+gulp.task('cacheFamilyDashBoard', function () {
+  return gulp.src('src/js/app/FamilyDashBoard/templates/**/*.html')
+    .pipe(templateCache())
+    .pipe(gulp.dest('public'));
+});
 
 
 //RUN IN SEQUENCE

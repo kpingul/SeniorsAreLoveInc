@@ -1,6 +1,20 @@
 @charset "UTF-8";
 /* CSS Document */
-
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; 
+}
+.loading {
+	text-align: center;
+	margin-top: 40px;
+	font-size: 2em;
+	display: none;
+}
+.block{
+	display: block;
+}
+.right-edit{
+	    margin-top: -15px;
+}
 body {
 	background: #f1f1f2;
 	-webkit-font-smoothing: antialiased;

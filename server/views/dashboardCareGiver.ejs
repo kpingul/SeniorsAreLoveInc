@@ -9,12 +9,12 @@
         <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
         <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="/public/build/css/stylesheet.min.css">
+        <link rel="stylesheet" href="http://d11rc4lxyaw8dg.cloudfront.net/public/build/css/stylesheet.min.css">
         <title>
           CareGiver | Dashboard
         </title>
     </head>
-    <body data-spy="scroll" data-target="#navbar" ng-controller="CGDashBoardCtrl">
+    <body data-spy="scroll" data-target="#navbar" ng-controller="CGDashBoardCtrl" class="ng-cloak">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -76,8 +76,11 @@
 
       <div class="container-fluid" style="    padding-bottom: 333px;">
         
-        <ui-view>
-      </ui-view>
+        <div ui-view>
+          <div class="loading">
+            Loading...
+          </div>
+        </div>
 
       </div>
 
@@ -131,19 +134,16 @@
 
 
     <!-- libs -->
-
-    <script src="/public/build/libs/deps.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src='/public/bower_components/angular-file-model/angular-file-model.js'></script>
-    <script src="/public/bower_components/underscore/underscore-min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
     <!-- scripts -->
     
-    <script src="/public/src/js/app/CGDashBoard/app.js"></script>
-    <script src="/public/src/js/app/CGDashBoard/controller/CGDashBoardCtrl.js"></script>
-    <script src="/public/src/js/app/CGDashBoard/controller/MessageJobCtrl.js"></script>
-    <script src="/public/src/js/app/CGDashBoard/controller/CGJobProfileCtrl.js"></script>
-    <script src="/public/src/js/app/CGDashBoard/Models/API.service.js"></script>
+    <script src="http://d11rc4lxyaw8dg.cloudfront.net/public/build/js/CGDashBoard/CGDashBoardApp.min.js"></script>
 
     </body>
 </html>

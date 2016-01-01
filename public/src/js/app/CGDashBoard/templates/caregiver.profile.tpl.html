@@ -27,12 +27,13 @@
 
 			<div class="right">
 				<a ui-sref="careGiverProfileEditPhoto">
-					
-				<span class="fa-stack fa-lg">
-				  <i class="fa fa-circle-thin fa-stack-2x"></i>
-				  <i class="fa fa-pencil fa-stack-1x"></i>
-				</span>		
-					
+					<h5>
+					<span class="fa-stack fa-lg">
+					  <i class="fa fa-circle-thin fa-stack-2x"></i>
+					  <i class="fa fa-pencil fa-stack-1x"></i>
+					</span>		
+					<small class="block">Edit</small>
+					</h5>
 				</a>
 			</div>
 
@@ -46,12 +47,16 @@
 			<div class="col-sm-12">
 				
 					<h4>Basic Info 
-						<a class="right" ui-sref="careGiverProfileEditInformation">
-							<span class="fa-stack fa-lg">
-								<i class="fa fa-circle-thin fa-stack-2x"></i>
-								<i class="fa fa-pencil fa-stack-1x"></i>
-							</span>
-						</a>
+						<div class="right right-edit">
+							<a ui-sref="careGiverProfileEditInformation">
+								<span class="fa-stack fa-lg">
+									<i class="fa fa-circle-thin fa-stack-2x"></i>
+									<i class="fa fa-pencil fa-stack-1x"></i>
+									
+								</span>
+								<small class="block">Edit</small>
+							</a>
+						</div>
 					</h4>
 					<p><i class="fa fa-lock"></i> Your contact information is secure and only used for vetting.</p>
 
@@ -81,11 +86,12 @@
 
 
 					<h4>About 
-						<a class="right" ui-sref="careGiverProfileEditAbout">
+						<a class="right right-edit" ui-sref="careGiverProfileEditAbout">
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-circle-thin fa-stack-2x"></i>
 								<i class="fa fa-pencil fa-stack-1x"></i>
 							</span>
+							<small class="block">Edit</small>
 						</a>
 					</h4>
 					<div ng-if="user.about">
@@ -96,11 +102,12 @@
 					<hr/>
 
 						<h4>Services 
-						<a class="right" ui-sref="careGiverProfileEditServices">
+						<a class="right right-edit" ui-sref="careGiverProfileEditServices">
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-circle-thin fa-stack-2x"></i>
 								<i class="fa fa-pencil fa-stack-1x"></i>
 							</span>
+							<small class="block">Edit</small>
 						</a>
 					</h4>
 					<div ng-if="user.hourRate">
@@ -122,11 +129,12 @@
 					<hr />
 
 					<h4>Experience 
-						<a class="right" ui-sref="careGiverProfileEditExperience">
+						<a class="right right-edit" ui-sref="careGiverProfileEditExperience">
 							<span class="fa-stack fa-lg">
 								<i class="fa fa-circle-thin fa-stack-2x"></i>
 								<i class="fa fa-pencil fa-stack-1x"></i>
 							</span>
+							<small class="block">Edit</small>
 						</a>
 					</h4>
 					
@@ -136,13 +144,13 @@
 						
 					</div>
 					<div ng-if="user.workExp.length > 0">
-								<h6>Work Experience</h6>
-								<address ng-repeat="exp in user.workExp track by $index">
-									{{exp.title}}<br>
-									{{exp.employer}}<br>
-									{{exp.start}} - {{exp.end}}<br>
-									{{exp.desc}}
-								</address>
+							<h6>Work Experience</h6>
+							<address ng-repeat="exp in user.workExp track by $index">
+								{{exp.title}}<br>
+								{{exp.employer}}<br>
+								{{exp.start}} - {{exp.end}}<br>
+								{{exp.desc}}
+							</address>
 					</div>
 					<hr/>
 			</div>

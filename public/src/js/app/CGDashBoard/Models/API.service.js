@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 		angular.module('CGDashBoard')
-			.factory('APIService', function ($http) {
+			.factory('APIService', [ '$http', function ($http) {
 					var API = {
 						getCareGiver: getCareGiver,
 						getCareGiverJobs: getCareGiverJobs,
@@ -15,9 +15,8 @@
 				
 					return API;
 
-					/*
-						GET METHOD 
-					*/
+					
+	
 					function getCareGiver(idOfCareGiver) {
 						return $http
 							.get('/api/caregiver/' + idOfCareGiver)
@@ -47,10 +46,6 @@
 							})
 							.catch(handleError);
 					}
-
-					/*
-						POST METHOD
-					*/
 
 					function updateCareGiver(idOfCareGiver, updatedValues) {
 						return $http
@@ -108,6 +103,6 @@
 						console.log(error);
 					}
 				
-			})
+			}])
 	
 }());
