@@ -2,6 +2,7 @@
 	'use strict';
       angular.module('CGDashBoard', ['templates', 'ui.router', 'file-model'])
         .run(['$rootScope', function ($rootScope) {
+          
           $rootScope.$on('$stateChangeSuccess',function(){
             $("html, body").animate({ scrollTop: 0 }, 0);
           });

@@ -21,13 +21,13 @@
 			<h5>Hourly Rate</h6>
 			<small class="mainColor" style="font-size: 1.3em;"><strong>${{caregiver.hourRate}}</strong></small>
 						
-			<h5>Phone</h5>
+			<h5 ng-if="caregiver.phone.length > 0">Phone</h5>
 			<small>{{::caregiver.phone}}</small>
 			<h5>Gender</h6>
 			<small >{{::caregiver.gender}}</small>
 
 			
-			<h5>Address</h5>
+			<h5 >Address</h5>
 			<small>{{::caregiver.contact.city | uppercase}}, CA, {{::caregiver.contact.zipCode}}</small>				
 	
 
@@ -47,10 +47,9 @@
 			<div class="col-sm-12">
 
 
-					<h4>About 
+					<h4>About </h4>
 					
-					</h4>
-						<p>{{caregiver.about}}</p>
+					<p>{{caregiver.about}}</p>
 						
 
 					<hr/>

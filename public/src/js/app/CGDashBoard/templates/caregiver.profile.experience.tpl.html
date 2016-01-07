@@ -88,7 +88,9 @@
 
 
         <a ui-sref="careGiverProfile" class="btn btn-default">Cancel</a>
+        
         <button type="submit" class="btn btn-danger" ng-if="user.workExp.length === 0" ng-click="updateExperience()">Update <i ng-if="expSubmitted" class="fa fa-spinner fa-spin"></i></button> 
+
         <button type="submit" class="btn btn-danger" ng-if="user.workExp.length > 0" ng-click="updateAllExperience()">Update <i ng-if="expSubmitted" class="fa fa-spinner fa-spin"></i></button>
 	</form> 
 		

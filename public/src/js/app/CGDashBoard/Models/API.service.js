@@ -7,6 +7,7 @@
 						getCareGiverJobs: getCareGiverJobs,
 						getJobProfile: getJobProfile,
 						updateCareGiver: updateCareGiver,
+						updateExperience: updateExperience,
 						updateInformation: updateInformation,
 						updateCareGiverServices: updateCareGiverServices,
 						getMessages: getMessages,
@@ -55,7 +56,14 @@
 							})
 							.catch(handleError);
 					}			
-
+					function updateExperience(idOfCareGiver, updatedValues) {
+						return $http
+							.post('/api/caregiver/experience/' + idOfCareGiver, updatedValues)
+							.then(function(response) {
+								return response;
+							})
+							.catch(handleError);
+					}
 					function updateInformation(idOfCareGiver, active, gender, address, city, zipcode) {
 						var updatedCareGiver = {
             	cgActive: active,

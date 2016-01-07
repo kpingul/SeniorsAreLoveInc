@@ -8,6 +8,7 @@
 								    <a ui-sref="caregiverProfile({id: caregiver._id})">
 								    	<img ng-src="/public/build/img/userlogo.png" ng-if="!caregiver.cgImageUrl" width="230" height="230" class="media-object img-circle" alt="">
 											<img ng-src="{{caregiver.cgImageUrl}}" ng-if="caregiver.cgImageUrl"width="230" class="media-object img-circle" alt="">
+											<center>learn more about {{caregiver.fName}}..</center>
 								    </a>
 								  </div>
 								  <div class="media-body">
@@ -19,8 +20,9 @@
 								  	</a>
 								  		<h4>${{caregiver.hourRate}} Per Hour</h4>
 								  		<h4>{{caregiver.yrsExp}}+ Exp</h4>
-											<p>{{caregiver.about.slice(0, caregiver.about.length/3)}}...</p>
-											<div class="label label-danger" style="margin-right: 5px; display: inline-block" ng-repeat="skill in caregiver.skills track by $index">
+											<p>{{caregiver.about}}</p>
+											<h5>Specialties:</h5>
+											<div class="label label-danger" style="margin: 5px; display: inline-block; padding: 12px" ng-repeat="skill in caregiver.skills track by $index">
 												
 												{{skill}}
 											</div>

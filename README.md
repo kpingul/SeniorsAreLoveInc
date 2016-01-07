@@ -20,6 +20,7 @@ Date: 12/7/15
 Client
 - jQuery for client form validation in login/signup pages
 - Angular for user dashboard (SPA/AJAX)
+- Angular Template Caching (Gulp module)
 
 Server
 - AWS EC2 instance ( Hosted on Virtual Cloud Server )

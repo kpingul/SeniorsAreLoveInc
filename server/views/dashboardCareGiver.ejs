@@ -46,7 +46,11 @@
               <li><a href="/logout" class="visible-xs-* hidden-lg hidden-md hidden-sm" style="position: relative">Log out</a></li>
 
                 <li style="padding-top: 10px"  class="dropdown hidden-xs">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{::user.fName}} <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    
+                    <img ng-src="{{user.cgImageUrl}}" width="22" class="media-object img-circle" style="display: inline" alt="">
+                    {{::user.fName}} <span class="caret"></span>
+                  </a>
                   <ul class="dropdown-menu">
                     <li><a ui-sref="careGiverProfileSettings">Settings</a></li>
                     <li role="separator" class="divider"></li>
@@ -143,6 +147,7 @@
     
     <!-- scripts -->
     <script src="http://d11rc4lxyaw8dg.cloudfront.net/public/build/js/CGDashBoard/CGDashBoardApp.min.js"></script>
+    <script src="/public/build/js/CGDashBoard/CGDashBoardApp.min.js"></script>
     <script src="http://d11rc4lxyaw8dg.cloudfront.net/public/src/js/app/CGDashBoard/templates.js"></script>
     </body>
 </html>

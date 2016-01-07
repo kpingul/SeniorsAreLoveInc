@@ -91,9 +91,9 @@
             end: $scope.user.profExp.end,
             desc: $scope.user.profExp.desc
           };
-
+          
           APIService
-            .updateCareGiver($scope.user._id, updatedCareGiver)
+            .updateExperience($scope.user._id, updatedCareGiver)
             .then(function(response) {
               if( response ) {
                 $scope.expSubmitted = false;
