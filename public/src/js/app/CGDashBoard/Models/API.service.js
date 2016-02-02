@@ -15,8 +15,6 @@
 					};
 				
 					return API;
-
-					
 	
 					function getCareGiver(idOfCareGiver) {
 						return $http

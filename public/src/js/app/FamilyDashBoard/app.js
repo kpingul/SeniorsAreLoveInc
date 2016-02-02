@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-   angular.module('FamilyDashBoard', ['ui.router'])
+   angular.module('FamilyDashBoard', ['templates', 'ui.router'])
      .run(['$rootScope', function ($rootScope) {
         $rootScope.$on('$stateChangeSuccess',function(){
           $("html, body").animate({ scrollTop: 0 }, 0);

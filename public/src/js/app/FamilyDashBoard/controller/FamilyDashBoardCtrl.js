@@ -1,7 +1,7 @@
 (function() {
 	'use strict';
 		angular.module('FamilyDashBoard')
-	       .controller('FamilyDashBoardCtrl', function($scope, $http, $location, $timeout) {
+	       .controller('FamilyDashBoardCtrl', ['$scope', '$http', '$location', '$timeout', function($scope, $http, $location, $timeout) {
 
           $scope.accountSubmitted = false;
           $scope.jobSubmitted = false;
@@ -124,7 +124,7 @@
                 }
               });
           }
-        })
+        }])
         .controller('CargiverCtrl', ['$scope', '$http', '$stateParams', function ($scope, $http, $stateParams) {
           $http
             .get('/api/caregiver/' + $stateParams.id)

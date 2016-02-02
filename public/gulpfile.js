@@ -40,6 +40,18 @@ gulp.task('CGDashBoardScripts', function(){
 			.pipe(gulp.dest('build/js/CGDashBoard'));
 });
 
+gulp.task('FamilyDashBoardScripts', function(){
+
+  return gulp.src([
+        'src/js/app/FamilyDashBoard/app.js',
+        'src/js/app/FamilyDashBoard/**/*.js'
+       ])
+      .pipe(concat('FamilyDashBoard.min.js'))
+      .pipe(uglify())
+      .pipe(gulp.dest('build/js/FamilyDashBoard'));
+});
+
+
 gulp.task('LibsJs', function() {
   return gulp.src(
     [
@@ -101,7 +113,7 @@ gulp.task('cacheCGDashBoard', function () {
 gulp.task('cacheFamilyDashBoard', function () {
   return gulp.src('src/js/app/FamilyDashBoard/templates/**/*.html')
     .pipe(templateCache())
-    .pipe(gulp.dest('public'));
+    .pipe(gulp.dest('src/js/app/FamilyDashBoard'));
 });
 
 
