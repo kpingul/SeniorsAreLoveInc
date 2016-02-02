@@ -32,7 +32,6 @@ var paths = {
 gulp.task('CGDashBoardScripts', function(){
 
 	return gulp.src([
-
 				'src/js/app/CGDashBoard/app.js',
 				'src/js/app/CGDashBoard/**/*.js'
 			 ])
@@ -41,17 +40,33 @@ gulp.task('CGDashBoardScripts', function(){
 			.pipe(gulp.dest('build/js/CGDashBoard'));
 });
 
+gulp.task('LibsJs', function() {
+  return gulp.src(
+    [
+      'bower_components/angular/angular.min.js/',
+      'bower_components/angular-ui-router/release/angular-ui-router.min.js/',
+      'bower_components/jquery/dist/jquery.min.js/',
+      'bower_components/underscore/underscore-min.js/',
+      'bower_components/bootstrap/dist/js/bootstrap.min.js/'
+    ])
+  .pipe(concat('LibsJs.js'))
+  .pipe(rename({suffix: '.min'}))
+  .pipe(uglify())
+  .pipe(gulp.dest('build/libs/'))
+});
 
+
+
+  
 //CSS sheets
 
 gulp.task('styles', function(){
-
 	return gulp.src('src/css/*.css')
 			.pipe(rename({suffix: '.min'}))
 			.pipe(minifyCss())
 			.pipe(gulp.dest('build/css'));
-
 });
+
 
 
 

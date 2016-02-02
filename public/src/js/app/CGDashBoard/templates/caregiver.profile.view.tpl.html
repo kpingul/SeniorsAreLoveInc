@@ -21,7 +21,7 @@
 			<h5>Hourly Rate</h6>
 			<small class="mainColor" style="font-size: 1.3em;"><strong>${{user.hourRate}}</strong></small>
 						
-			<h5>Phone</h5>
+			<h5 ng-if="user.phone.length > 0 ">Phone</h5>
 			<small>{{::user.phone}}</small>
 			<h5>Gender</h6>
 			<small >{{::user.gender}}</small>
